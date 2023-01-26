@@ -28,6 +28,7 @@ class CategoriaDao:
         return cate
 
 
+
     @classmethod
     def lercategoria(cls):  # o usuário visualizar o que há em categoria.
         arquivo = open('categoria.txt', 'r')
@@ -42,19 +43,22 @@ class CategoriaDao:
 
 
 
+
+
+
 # CLASSES DA ÁREA DE PRODUTOS:
 
 class ProdutosDao:
     @classmethod
-    def salvarProdutos(cls, produto: Produtos): # Salvar Produto
+    def salvar(cls, produto: Produtos): # Salvar Produto
         with open('produtos.txt', 'a') as arq:
             arq.writelines(produto.nome + '' + produto.preco + '' + produto.categoria + '\n')
 
 
 
     @classmethod
-    def ler_produtos(cls):
-        with open('produto.txt', 'r') as arq:
+    def ler(cls):
+        with open('produtos.txt', 'r') as arq:
             cls.produto = arq.readlines()
 
     

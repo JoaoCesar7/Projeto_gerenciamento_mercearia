@@ -1,6 +1,6 @@
 # é simplesmente uma função Python que recebe uma requisição Web e retorna uma resposta Web.
 
-from controller import CategoriaController
+from controller import CategoriaController, ProdutosController
 from dao import CategoriaDao
 
 print('======================= Gerenciamento de Mercearia =======================')
@@ -10,7 +10,7 @@ print()
 
 
 while True:
-    decisao2 = input('[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [0]Sair: ')
+    decisao2 = input('[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [0]Fechar: ')
     decisao2 = int(decisao2)
     print('')
     if decisao2 == 0:
@@ -21,7 +21,7 @@ while True:
 # Área de Cadastro/Alteração/Remoção
 
     if decisao2 == 1:
-        categoria = input('[C]adastrar [A]lterar [R]emover: ').lower()
+        categoria = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
 
         if categoria == 'c':
             nome_categoria = input('Nome da categoria: ').upper()
@@ -31,9 +31,9 @@ while True:
         if categoria == 'a':
             CategoriaDao.lercategoria()
 
-            alterar_categoria = input('Digite o nome da categoria que deseja alterar: ')
-            CategoriaController.alterarCategoria(alterar_categoria)
-
+            alterar_categoria = input('Digite o nome da categoria que deseja alterar: ').upper()
+            alterada_categoria = input('Digite o nome da nova categoria alterada: ').upper()
+            CategoriaController.alterarCategoria(alterarCategoria=alterar_categoria, alteradaCategoria=alterada_categoria)
 
 
         if categoria == 'r':
@@ -44,4 +44,50 @@ while True:
             CategoriaController.removerCategoria(indice_categoria)
             
 
+        if categoria == 'v':
+            continue
+
+
+
+# Área de Produtos
+
+    if decisao2 == 2:
+        produtos = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
+
+        if produtos == 'c':
+            nome = input('Nome do produto: ').upper()
+            preco = float(input('Valor do produto: R$'))
+            categoria = input('Categoria do profuto: ').upper()
+            ProdutosController.cadastrarProduto(nome, preco, categoria)
+
             
+
+
+
+
+   
+
+
+        if produtos == 'a':
+            ...
+
+
+        if produtos == 'r':
+            ...
+
+        if produtos == 'v':
+            continue
+
+
+
+
+
+
+
+
+# Tratamento
+
+    if not decisao2:
+        print('Desculpe... Caractere inválido')
+        print('Tente novamente..')
+        continue

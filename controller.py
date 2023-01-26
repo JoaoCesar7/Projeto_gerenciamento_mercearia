@@ -1,7 +1,7 @@
 # Controller onde fica as validações do nosso algoritimo.
 
 from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Pessoas
-from dao import CategoriaDao
+from dao import CategoriaDao, ProdutosDao, EstoqueDao
 
 
 
@@ -33,7 +33,7 @@ class CategoriaController:
         print('')
         cate = list(map(lambda x: x.categoria.replace('\n', '') == removerCategoria, x))
         if len(cate) == 0:
-            print('Categoria não existe em nossa base de dados')
+            print('Categoria não existe em nossa base')
         else:
             for i in range(len(x)):
                 if x[i].categoria.replace('\n', '') == removerCategoria:
@@ -56,19 +56,34 @@ class CategoriaController:
         if len(cat) > 0:
             alt = list(filter(lambda x: x.categoria.replace('\n', '') == alteradaCategoria, y))
             if len(alt) == 0:
-                try:
-                    y = list(filter(lambda x: x.catergoria(alteradaCategoria)))
-                    if y.categoria == alterarCategoria:
-                        ...
-                except:
-                    ...
-        else:
-            ...
+                y = list(map(lambda x: Categoria(alteradaCategoria)) if(y.categoria == alterarCategoria) else(y), y)
+            else:
+                print(f'Categoria {y} existe em nossa base de dados.')
+        
+        print('Categoria NÃO existe em nossa base de dados.')
+
+
 
 
 
 # CLASSES DA ÁREA DE PRODUTOS
 
+class ProdutosController:
+    @classmethod
+    def cadastrarProduto(cls, nome, preco, categoria):
+        existe = False
+        prod = ProdutosDao.ler()
+        print('')
+        for i in prod:
+            if i.produto == nome == preco == categoria:
+                existe = True
+
+
+        if not existe:
+            ProdutosDao.salvar(nome, preco, categoria)
+            print('Produto salvo com sucesso')
+        else:
+            print('Produto existe em nossa base de dados')
 
 
 
@@ -76,8 +91,4 @@ class CategoriaController:
 
 
 
-# CLASSES DA ÁREA DE ESTOQUE
-
-
-
-            
+# CLASSES DA ÁREA DE ESTOQUE:
