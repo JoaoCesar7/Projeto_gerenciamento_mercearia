@@ -23,17 +23,16 @@ class CategoriaController:
             print('Categoria cadastrada com sucesso!')
         else:
             print('A categoria já existe em nossa base de dados.')
-
-
+            
 
 
     @classmethod
     def removerCategoria(cls, removerCategoria):  # Remover Categoria
         x = CategoriaDao.ler_categoria()
         print('')
-        cate = list(map(lambda x: x.categoria.replace('\n', '') == removerCategoria, x))
+        cate = list(filter(lambda x: x.categoria.replace('\n', '') == removerCategoria, x))
         if len(cate) == 0:
-            print('Categoria não existe em nossa base')
+            print(f'NÃO existe {cate} em nossa base de dados.')
         else:
             for i in range(len(x)):
                 if x[i].categoria.replace('\n', '') == removerCategoria:
@@ -52,19 +51,29 @@ class CategoriaController:
     def alterarCategoria(cls, alterarCategoria, alteradaCategoria):  # Alterar Categoria
         y = CategoriaDao.ler_categoria()
         print('')
-        cat = list(filter(lambda x: x.categoria.replace('\n', '') == alterarCategoria, y))
-        if len(cat) > 0:
-            alt = list(filter(lambda x: x.categoria.replace('\n', '') == alteradaCategoria, y))
-            if len(alt) == 0:
-                y = list(map(lambda x: Categoria(alteradaCategoria)) if(y.categoria == alterarCategoria) else(y), y)
-            else:
-                print(f'Categoria {y} existe em nossa base de dados.')
-        
-        print('Categoria NÃO existe em nossa base de dados.')
+        alt = list(filter(lambda x: x.categoria.replace('\n', '') == alterarCategoria, y))
+        if len(alt) == 0:
+            print('Categoria que deseja alterar... NÃO existe em nossa base de dados.')
+        else:
+            for i in range(len(y)):
+                if y[i].categoria.replace('\n', '') == alterarCategoria:
+                    del y[i]
+                    break
+
+            with open('categoria.txt', 'w') as arq:
+                for i in y:
+                    arq.writelines(i.categoria)
+
+            existe = False
+            for i in y: 
+                if i.categoria.replace('\n', '') == alteradaCategoria:
+                    existe = True
+            if not existe:
+                CategoriaDao.salvarCategoria(alteradaCategoria)
+                print('Categoria alterada com sucesso!')
 
 
-
-
+       
 
 # CLASSES DA ÁREA DE PRODUTOS
 
@@ -92,3 +101,8 @@ class ProdutosController:
 
 
 # CLASSES DA ÁREA DE ESTOQUE:
+
+class Estoque:
+    @classmethod
+    def cadastrarEstoque(cls, nome, produto):
+        ...

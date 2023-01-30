@@ -12,6 +12,7 @@ print()
 while True:
     decisao2 = input('[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [0]Fechar: ')
     decisao2 = int(decisao2)
+
     print('')
     if decisao2 == 0:
         break
@@ -24,20 +25,26 @@ while True:
         categoria = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
 
         if categoria == 'c':
+            mostrar = CategoriaDao.lercategoria()
+            for i in mostrar:
+                print(i, end='')
             nome_categoria = input('Nome da categoria: ').upper()
             CategoriaController.cadastrarCategoria(nome_categoria)  # Chamando controller 
         
 
         if categoria == 'a':
-            CategoriaDao.lercategoria()
-
+            x = CategoriaDao.lercategoria()
+            for i in x:
+                print(i, end='')
             alterar_categoria = input('Digite o nome da categoria que deseja alterar: ').upper()
             alterada_categoria = input('Digite o nome da nova categoria alterada: ').upper()
             CategoriaController.alterarCategoria(alterarCategoria=alterar_categoria, alteradaCategoria=alterada_categoria)
 
 
         if categoria == 'r':
-            CategoriaDao.lercategoria()
+            x = CategoriaDao.lercategoria()
+            for i in x:
+                print(i, end="")
     
             indice_categoria = input('Digite o nome da categoria que dejesa remover: ').upper()
 

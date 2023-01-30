@@ -33,14 +33,7 @@ class CategoriaDao:
     def lercategoria(cls):  # o usuário visualizar o que há em categoria.
         arquivo = open('categoria.txt', 'r')
         lista_categoria = arquivo.readlines()
-        print(lista_categoria)
-   
-
-
-        for i in enumerate(lista_categoria):
-            print(i)
-            arquivo.close()
-
+        return lista_categoria
 
 
 
@@ -71,6 +64,8 @@ class ProdutosDao:
 
 
 
+
+
 # CLASSES DE ESTOQUES:
 
 class EstoqueDao:
@@ -87,3 +82,23 @@ class EstoqueDao:
             cls.estoque = arq.readlines()
 
     
+
+
+
+
+
+# CLASSES DE FORNECEDOR:
+
+class Fornecedor:
+    ...
+
+
+
+
+
+
+
+# CLASSES PESSOAS:
+
+class Pessoas:
+    ...
