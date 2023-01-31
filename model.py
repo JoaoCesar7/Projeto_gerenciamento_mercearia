@@ -19,8 +19,8 @@ class Produtos:
 
 class Estoque:
 
-    def __init__(self, produto, quantidade):
-        self.produto = produto
+    def __init__(self, produtos, quantidade):
+        self.produtos = produtos
         self.quantidade = quantidade
 
 

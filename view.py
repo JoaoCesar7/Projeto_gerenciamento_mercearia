@@ -63,9 +63,9 @@ while True:
 
         if produtos == 'c':
             nome = input('Nome do produto: ').upper()
-            preco = float(input('Valor do produto: R$'))
-            categoria = input('Categoria do profuto: ').upper()
-            ProdutosController.cadastrarProduto(nome, preco, categoria)
+            preco = input('Valor do produto: R$')
+            categoria = input('Categoria do produto: ').upper()
+            ProdutosController.cadastrarProduto(nome=nome, preco=preco, categoria=categoria)
 
             
 

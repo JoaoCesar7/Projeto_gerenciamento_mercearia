@@ -43,23 +43,27 @@ class CategoriaDao:
 
 class ProdutosDao:
     @classmethod
-    def salvar(cls, produto: Produtos): # Salvar Produto
+    def salvar(cls, produtos: Produtos): # Salvar Produto
         with open('produtos.txt', 'a') as arq:
-            arq.writelines(produto.nome + '' + produto.preco + '' + produto.categoria + '\n')
+            arq.writelines(produtos.nome + '|' + produtos.preco + '|' + produtos.categoria + '\n')
 
 
 
     @classmethod
     def ler(cls):
         with open('produtos.txt', 'r') as arq:
-            cls.produto = arq.readlines()
+            cls.produtos = arq.readlines()
 
     
-        prod = []
+        produ = []
 
-        if len(cls.produto) > 0:
-            for i in cls.produto:
-                prod.append(Produtos(i))
+        if len(cls.produtos) > 0:
+            for i in cls.produtos:
+                produ.append(Produtos(i[0], i[1], i[2]))
+
+
+        return produ
+
 
 
 
