@@ -67,22 +67,24 @@ while True:
             categoria = input('Categoria do produto: ').upper()
             ProdutosController.cadastrarProduto(nome=nome, preco=preco, categoria=categoria)
 
+        
+
+        elif produtos == 'a':
+            ...
+
+
+        elif produtos == 'r':
+            produtoRemovido = input('Digite nome do produto que deseja remover: ').upper()
+            ProdutosController.removerProduto(removerProduto=produtoRemovido)
+
             
 
+                
 
 
 
-   
 
-
-        if produtos == 'a':
-            ...
-
-
-        if produtos == 'r':
-            ...
-
-        if produtos == 'v':
+        elif produtos == 'v':
             continue
 
 
