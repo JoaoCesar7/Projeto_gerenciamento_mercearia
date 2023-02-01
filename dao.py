@@ -45,7 +45,7 @@ class ProdutosDao:
     @classmethod
     def salvar(cls, produtos: Produtos): # Salvar Produto
         with open('produtos.txt', 'a') as arq:
-            arq.writelines(produtos.nome + '|' + produtos.preco + '|' + produtos.categoria + '\n')
+            arq.writelines(produtos.nome + ' | ' + produtos.preco + ' | ' + produtos.categoria + '\n')
 
 
 
@@ -63,9 +63,6 @@ class ProdutosDao:
 
 
         return produ
-
-
-
 
 
 
