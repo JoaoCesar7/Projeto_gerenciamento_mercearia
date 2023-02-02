@@ -99,16 +99,23 @@ class ProdutosController:
     @classmethod
     def removerProduto(cls, removerProduto):
         x = ProdutosDao.ler()
-        print('')
+
         produto = list(filter(lambda x: x.produtos.replace('\n', '') == removerProduto, x))
         if len(produto) == 0:
-            print('Produto NÃO existe em nossa base de dados.')
+
+            print(f'Categoria NÃO existe em nossa base de dados.')
         else:
-            ...
+            for i in range(len(x)):
+                print(i)
+                if x[i].produtos.replace('\n', '') == removerProduto:
+                    del x[i]
+                    break
 
 
-
-
+            with open('produtos.txt', 'w') as arq:
+                for i in x:
+                    print(i)
+                    arq.writelines(i.produtos)
 
 
 
