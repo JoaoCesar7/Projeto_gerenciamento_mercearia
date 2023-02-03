@@ -1,7 +1,7 @@
 # é simplesmente uma função Python que recebe uma requisição Web e retorna uma resposta Web.
 
 from controller import CategoriaController, ProdutosController
-from dao import CategoriaDao
+from dao import CategoriaDao, ProdutosDao
 
 print('======================= Gerenciamento de Mercearia =======================')
 print()
@@ -74,7 +74,11 @@ while True:
 
 
         elif produtos == 'r':
-            produtoRemovido = input('Digite nome do produto que deseja remover: ').upper()
+            mostrar = ProdutosDao.lerProduto()
+            for i in mostrar:
+                print(i, end='')
+
+            produtoRemovido = input('Digite nome do produto que deseja remover: ')
             ProdutosController.removerProduto(removerProduto=produtoRemovido)
 
             
