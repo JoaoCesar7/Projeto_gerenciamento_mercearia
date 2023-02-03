@@ -84,7 +84,6 @@ class ProdutosController:
         prod = ProdutosDao.ler()
         for i in prod:
             if i == nome ==  preco == categoria:
-                print(i)
                 existe = True
 
         
@@ -100,23 +99,35 @@ class ProdutosController:
     def removerProduto(cls, removerProduto):
         x = ProdutosDao.ler()
 
-        produto = list(filter(lambda x: x.produtos.replace('\n', '') == removerProduto, x))
-        if len(produto) == 0:
-
-            print(f'Categoria NÃO existe em nossa base de dados.')
+        produ = list(map(lambda x: x == removerProduto, x))
+        if len(produ) == 0:
+            print('Não existe')
         else:
-            for i in range(len(x)):
-                print(i)
-                if x[i].produtos.replace('\n', '') == removerProduto:
+            for i in x:
+                if i == removerProduto:
                     del x[i]
                     break
+
+            with open('produtos.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i)
+
+
+'''
+            for i in range(len(x)):
+                print(i)
+                if x[i] == removerProduto:
+                    del x
+                    break
+                    
+
 
 
             with open('produtos.txt', 'w') as arq:
                 for i in x:
-                    print(i)
-                    arq.writelines(i.produtos)
 
+                    arq.writelines(i)
+'''
 
 
 
