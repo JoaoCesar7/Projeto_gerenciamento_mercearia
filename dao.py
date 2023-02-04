@@ -60,6 +60,7 @@ class ProdutosDao:
 
         if len(cls.produtos) > 0:
             for i in cls.produtos:
+                print(i)
                 produ.append(Produtos(i[0], i[1], i[2]))
 
 
