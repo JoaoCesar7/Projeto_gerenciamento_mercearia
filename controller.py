@@ -96,28 +96,17 @@ class ProdutosController:
 
 
     @classmethod
-    def removerProduto(cls, removerProduto):
+    def removerProduto(cls, nomeProduto):
         x = ProdutosDao.ler()
 
-        produ = list(map(lambda x: x == removerProduto, x))
+        produ = list(map(lambda x: x == nomeProduto, x))
         if len(produ) == 0:
             print('Não existe')
         else:
-            for i in x:
-                if i == removerProduto:
-                    del x[i]
-                    break
-
-            with open('produtos.txt', 'w') as arq:
-                for i in x:
-                    arq.writelines(i)
-
-
-'''
-            for i in range(len(x)):
+            for i in range(0, len(x)):
                 print(i)
-                if x[i] == removerProduto:
-                    del x
+                if i.nome == nomeProduto:
+                    del i
                     break
                     
 
@@ -126,8 +115,7 @@ class ProdutosController:
             with open('produtos.txt', 'w') as arq:
                 for i in x:
 
-                    arq.writelines(i)
-'''
+                    arq.writelines(i.nome)
 
 
 
