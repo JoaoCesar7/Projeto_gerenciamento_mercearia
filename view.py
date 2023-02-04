@@ -74,12 +74,12 @@ while True:
 
 
         elif produtos == 'r':
-            mostrar = ProdutosDao.lerProduto()
-            for i in mostrar:
-                print(i, end='')
+            # mostrar = ProdutosDao.lerProduto()
+            # for i in mostrar:
+            #    print(i, end='')
 
-            produtoRemovido = input('Digite nome do produto que deseja remover: ')
-            ProdutosController.removerProduto(removerProduto=produtoRemovido)
+            produtoRemovido = input('Digite nome do produto que deseja remover: ').upper()
+            ProdutosController.removerProduto(nomeProduto=produtoRemovido)
 
             
 
