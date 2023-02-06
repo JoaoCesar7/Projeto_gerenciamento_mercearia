@@ -28,7 +28,6 @@ class CategoriaDao:
         return cate
 
 
-
     @classmethod
     def lercategoria(cls):  # o usuário visualizar o que há em categoria.
         arquivo = open('categoria.txt', 'r')
@@ -53,13 +52,13 @@ class ProdutosDao:
     @classmethod
     def ler(cls):
         with open('produtos.txt', 'r') as arq:
-            cls.produtos = arq.readlines()
+            cls.nome = arq.readlines()
 
     
         produ = []
 
-        if len(cls.produtos) > 0:
-            for i in cls.produtos:
+        if len(cls.nome) > 0:
+            for i in cls.nome:
                 print(i)
                 produ.append(Produtos(i[0], i[1], i[2]))
 
@@ -96,13 +95,20 @@ class EstoqueDao:
     
 
 
-
-
-
 # CLASSES DE FORNECEDOR:
 
 class Fornecedor:
-    ...
+    
+    @classmethod
+    def salvar(cls, fornecedor: Fornecedor):
+        with open('fornecedor.txt', 'a') as arq:
+            arq.writelines(fornecedor.nome + '' + fornecedor.telefone + '' + fornecedor.cnpj + '' + fornecedor.categoria)
+            arq.writelines('\n')
+
+    @classmethod
+    def ler(cls):
+        with open('fornecedor.txt', 'r') as arq:
+            ...
 
 
 
