@@ -29,10 +29,9 @@ while True:
             for i in mostrar:
                 print(i, end='')
             nome_categoria = input('Nome da categoria: ').upper()
-            CategoriaController.cadastrarCategoria(nome_categoria)  # Chamando controller 
-        
+            CategoriaController.cadastrarCategoria(nome_categoria)  # Chamando controller      
 
-        if categoria == 'a':
+        elif categoria == 'a':
             x = CategoriaDao.lercategoria()
             for i in x:
                 print(i, end='')
@@ -40,8 +39,7 @@ while True:
             alterada_categoria = input('Digite o nome da nova categoria alterada: ').upper()
             CategoriaController.alterarCategoria(alterarCategoria=alterar_categoria, alteradaCategoria=alterada_categoria)
 
-
-        if categoria == 'r':
+        elif categoria == 'r':
             x = CategoriaDao.lercategoria()
             for i in x:
                 print(i, end="")
@@ -49,16 +47,22 @@ while True:
             indice_categoria = input('Digite o nome da categoria que dejesa remover: ').upper()
 
             CategoriaController.removerCategoria(indice_categoria)
-            
 
-        if categoria == 'v':
+        elif categoria == 'v':
+            continue
+    
+        else:
+            print('')
+            print('Desculpe.. Opção inválida. Tente novamente.')
+            print('Opções [C] [R] [A] [V]')
+            print('')
             continue
 
 
 
 # Área de Produtos
 
-    if decisao2 == 2:
+    elif decisao2 == 2:
         produtos = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
 
         if produtos == 'c':
@@ -66,12 +70,18 @@ while True:
             preco = input('Valor do produto: R$')
             categoria = input('Categoria do produto: ').upper()
             ProdutosController.cadastrarProduto(nome=nome, preco=preco, categoria=categoria)
-
-        
-
+   
         elif produtos == 'a':
-            ...
-
+            # mostrar = Produtos.lerProdutos()
+            # for i in mostrar:
+            #    print(i, end='')
+            
+            nome_alterar = input('Nome do produto: ').upper()
+            nome_alterado = input('Nome do produto: ').upper()
+            valor_alterado = input('Valor do produto: R$').upper()
+            categoria_alterada = input('Categoria do produto: ').upper()
+            ProdutosController.alterarProduto(alterarProduto=nome_alterar, nome=nome_alterado, 
+            preco=valor_alterado, categoria=categoria_alterada)
 
         elif produtos == 'r':
             # mostrar = ProdutosDao.lerProduto()
@@ -81,26 +91,48 @@ while True:
             produtoRemovido = input('Digite nome do produto que deseja remover: ').upper()
             ProdutosController.removerProduto(nomeProduto=produtoRemovido)
 
-            
-
-                
-
-
-
-
         elif produtos == 'v':
             continue
 
+        else:
+            print('')
+            print('Desculpe... Opção inválida. Tente novamente.')
+            print('Opções [C] [R] [A] [V]')
+            print('')
+            continue
+
+    
+    elif decisao2 == 3:
+        fornecedor = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
+
+        if fornecedor == 'c':
+            ...
+
+        elif fornecedor == 'r':
+            ...
+        
+        elif fornecedor == 'a':
+            ...
+
+        elif fornecedor == 'v':
+            continue
 
 
-
-
+        else:
+            print('')
+            print('Desculpe... Opção inválida, tente novamente as opções...')
+            print('Digite [C] [R] [A] [V]')
+            print('')
+            continue
 
 
 
 # Tratamento
 
-    if not decisao2:
-        print('Desculpe... Caractere inválido')
-        print('Tente novamente..')
+
+    else:
+        print('Desculpe... Opção desejava inválida. Por favor...')
+        print('Tente novamente')
+        print('Opção abaixo.')
+        print('')
         continue
