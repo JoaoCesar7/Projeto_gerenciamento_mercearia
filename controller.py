@@ -105,7 +105,7 @@ class ProdutosController:
 
             with open('produtos.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome)
+                    arq.writelines(i.nome.replace('\n', ''))
 
     @classmethod
     def alterarProduto(cls, alterarProduto, nome, preco, categoria):
@@ -122,20 +122,39 @@ class ProdutosController:
 
 # CLASSES DA ÁREA DE ESTOQUE:
 
-class Estoque:
+class EstoqueController:
     @classmethod
     def cadastrarEstoque(cls, nome, preco, categoria, quantidade):
         existe = False
         x = EstoqueDao.salvar()
         est = list(filter(lambda x: x == nome == preco == categoria == quantidade))
+        print('')
+        for i in x:
+            if i == nome == preco == categoria == quantidade:
+                existe = True
+
+        if not existe:
+            EstoqueDao.salvar(nome == preco == categoria == quantidade)
+            print('cadastrado com sucesso')
+        else:
+            print('Estoque NÃO existe em nossa base de dados.')
 
 
 
 
-
-class Fornecedor:
+class FornecedorController:
 
     @classmethod
     def cadastrar(cls, nome, telefone, cnpj, categoria):
-        ...
-
+        existe = False
+        x = ProdutosDao.ler()
+        forne = list(filter(lambda x: x == nome == telefone == cnpj == categoria, x))
+        for i in forne:
+            if i == nome == telefone == cnpj == categoria:
+                existe = True
+        
+        if not existe:
+            ProdutosDao.salvar(nome, telefone, cnpj, categoria)
+            print('Fornecedor cadastrado com sucesso.')
+        else:
+            print('Fornecedor NÃO existe em nossa base de dados.')
