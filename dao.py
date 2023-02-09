@@ -59,7 +59,6 @@ class ProdutosDao:
 
         if len(cls.nome) > 0:
             for i in cls.nome:
-                print(i)
                 produ.append(Produtos(i[0], i[1], i[2]))
 
 
@@ -108,10 +107,17 @@ class Fornecedor:
     @classmethod
     def ler(cls):
         with open('fornecedor.txt', 'r') as arq:
-            ...
+            cls.fornecedor = arq.readlines()
 
 
+        fornec = []
 
+        if len(cls.nome) > 0:
+            for i in cls.nome:
+                fornec.append(i)
+
+
+        return fornec
 
 
 
