@@ -95,7 +95,7 @@ class ProdutosController:
 
         produ = list(filter(lambda x: x.nome.replace('\n', '') == nomeProduto, x))
         if produ == 0:
-            print('Não existe')
+            print('Não existe esse produto em nossa base de dados.')
         else:
             for i in range(len(x)):
                 if x[i].nome.replace('\n', '') == nomeProduto:
