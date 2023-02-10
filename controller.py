@@ -99,13 +99,15 @@ class ProdutosController:
         else:
             for i in range(len(x)):
                 if x[i].nome.replace('\n', '') == nomeProduto:
-                    del x[i]
+                    del i
                     break
+
+                print('Produto removido com sucesso.')
 
 
             with open('produtos.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome.replace('\n', ''))
+                    arq.writelines(i.nome)
 
     @classmethod
     def alterarProduto(cls, alterarProduto, nome, preco, categoria):
@@ -124,17 +126,17 @@ class ProdutosController:
 
 class EstoqueController:
     @classmethod
-    def cadastrarEstoque(cls, nome, preco, categoria, quantidade):
+    def cadastrarEstoque(cls, produtos, quantidade):
         existe = False
         x = EstoqueDao.salvar()
-        est = list(filter(lambda x: x == nome == preco == categoria == quantidade))
+        est = list(filter(lambda x: x == produtos == quantidade))
         print('')
         for i in x:
-            if i == nome == preco == categoria == quantidade:
+            if i == produtos == quantidade:
                 existe = True
 
         if not existe:
-            EstoqueDao.salvar(nome == preco == categoria == quantidade)
+            EstoqueDao.salvar(Estoque(produtos == quantidade))
             print('cadastrado com sucesso')
         else:
             print('Estoque NÃO existe em nossa base de dados.')
