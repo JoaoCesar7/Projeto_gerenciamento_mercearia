@@ -76,7 +76,7 @@ while True:
             # for i in mostrar:
             #    print(i, end='')
             
-            nome_alterar = input('Nome do produto: ').upper()
+            nome_alterar = input('Nome do produto que deseja alterar: ').upper()
             nome_alterado = input('Nome do produto: ').upper()
             valor_alterado = input('Valor do produto: R$').upper()
             categoria_alterada = input('Categoria do produto: ').upper()
