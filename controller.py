@@ -75,19 +75,21 @@ class CategoriaController:
 class ProdutosController:
     @classmethod
     def cadastrarProduto(cls, nome, preco, categoria):
-        existe = False
         prod = ProdutosDao.ler()
-        for i in prod:
-            if i == nome ==  preco == categoria:
-                existe = True
+        cat = CategoriaDao.ler_categoria()
+        x = list(filter(lambda x: x.categoria.replace('\n', '') == categoria, cat))
 
-        
-        if not existe:
-            ProdutosDao.salvar(Produtos(nome, preco, categoria))
-            print('Produto cadastrado com sucesso.')
+        h = list(filter(lambda x: x.nome == nome, prod))
+        if len(x) > 0:
+            if len(h) == 0:
+                produto = Produtos(nome, preco, categoria)
+                ProdutosDao.salvar(produto)
+                print('Produto Cadastrado com sucesso.')
+            else:
+                print('Produto existe no nosso estoque.')
         else:
-            print('Produto existe em nossa base de dados.')
-
+            print('Categoria inexistente em nossa base de dados.')
+        
     @classmethod
     def removerProduto(cls, nomeProduto):
         x = ProdutosDao.ler()
@@ -98,22 +100,25 @@ class ProdutosController:
             print('Não existe esse produto em nossa base de dados.')
         else:
             for i in range(len(x)):
-                if x[i].nome.replace('\n', '') == nomeProduto:
-                    del i
-                    break
-
-                print('Produto removido com sucesso.')
+                print(i)
 
 
-            with open('produtos.txt', 'w') as arq:
-                for i in x:
-                    arq.writelines(i.nome)
+
+
+
+
+
+
+
+
+
+
 
     @classmethod
     def alterarProduto(cls, alterarProduto, nome, preco, categoria):
         x = ProdutosDao.ler()
 
-        pro = list(filter(lambda x: x.nome == alterarProduto, x))
+        pro = list(filter(lambda x: x.alterarProduto == alterarProduto, x))
         if len(pro) == 0:
             print('Produto NÃO existe em nossa base de dados.')
         else:
@@ -126,21 +131,21 @@ class ProdutosController:
 
 class EstoqueController:
     @classmethod
-    def cadastrarEstoque(cls, produtos, quantidade):
-        existe = False
-        x = EstoqueDao.salvar()
-        est = list(filter(lambda x: x == produtos == quantidade))
-        print('')
-        for i in x:
-            if i == produtos == quantidade:
-                existe = True
+    def cadastrarEstoque(cls, nome, preco, categoria, quantidade):
+        x = EstoqueDao.ler()
+        y = CategoriaDao.ler_categoria()
+        z = list(filter(lambda x: x.categoria == categoria, y))
 
-        if not existe:
-            EstoqueDao.salvar(Estoque(produtos == quantidade))
-            print('cadastrado com sucesso')
-        else:
-            print('Estoque NÃO existe em nossa base de dados.')
-
+        est = list(filter(lambda x: x.nome == nome, x))
+        if len(z) > 0:
+            if len(est) == 0:
+                produto = Produtos(nome, preco, categoria)
+                EstoqueDao.salvar(produto, quantidade)
+                print('Produto cadastrado com sucesso.')
+            else:
+                print('Produto já existe no estoque.')
+        else: 
+            ...
 
 
 
