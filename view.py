@@ -84,9 +84,9 @@ while True:
             preco=valor_alterado, categoria=categoria_alterada)
 
         elif produtos == 'r':
-            # mostrar = ProdutosDao.lerProduto()
-            # for i in mostrar:
-            #    print(i, end='')
+            mostrar = ProdutosDao.lerProduto()
+            for i in mostrar:
+                print(i, end='')
 
             produtoRemovido = input('Digite nome do produto que deseja remover: ').upper()
             ProdutosController.removerProduto(nomeProduto=produtoRemovido)
