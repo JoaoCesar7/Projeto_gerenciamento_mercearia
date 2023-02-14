@@ -109,7 +109,7 @@ class ProdutosController:
 
             with open('produtos.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines()
+                    arq.writelines(i.nome)
 
 
 
