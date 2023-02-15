@@ -1,7 +1,7 @@
 # Controller onde fica as validações do nosso algoritimo.
 
 from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Pessoas
-from dao import CategoriaDao, ProdutosDao, EstoqueDao
+from dao import CategoriaDao, ProdutosDao, EstoqueDao, FornecedorDao
 
 
 
@@ -96,29 +96,20 @@ class ProdutosController:
     def removerProduto(cls, nomeProduto):
         x = ProdutosDao.ler()
 
-        produ = list(filter(lambda x: x.nome == nomeProduto, x))
+        produ = list(filter(lambda x: x.nome.replace('\n', '') == nomeProduto, x))
         if len(produ) == 0:
             print('Não existe esse produto em nossa base de dados.')
         else:
-            for i in x:
-                if i.nome == nomeProduto:
-                    del i.nome
+            for i in range(len(x)):
+                if x[i].nome.replace('\n', '') == nomeProduto:
+                    del x[i]
                     break
 
             print('Produto removido com sucesso')
 
             with open('produtos.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome)
-
-
-
-
-
-
-
-
-
+                    arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria)
 
 
 
@@ -126,12 +117,54 @@ class ProdutosController:
     def alterarProduto(cls, alterarProduto, nome, preco, categoria):
         x = ProdutosDao.ler()
 
-        pro = list(filter(lambda x: x.alterarProduto == alterarProduto, x))
+        pro = list(filter(lambda x: x.nome.replace('\n', '') == alterarProduto, x))
         if len(pro) == 0:
             print('Produto NÃO existe em nossa base de dados.')
         else:
-            for i in range(0, len(x)):
-                print(i)
+            for i in range(len(x)):
+                if x[i].nome.replace('\n', '') == alterarProduto:
+                    del x[i]
+                    break
+            
+            print('Produto em processo de alteração')
+
+            with open('produtos.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria)
+        
+            for i in pro:
+                if not i.nome == nome: 
+                    produtos = Produtos(nome, preco, categoria)
+                    ProdutosDao.salvar(produtos)
+                    print('Produto cadastrado com sucesso.')
+
+
+
+# CLASSE DA ÁREA DE FORNECEDORES
+
+class FornecedorController:
+
+    @classmethod
+    def cadastrar(cls, nome, telefone, cnpj, categoria):
+        x = FornecedorDao.ler()
+
+        forne = list(filter(lambda x: x.nome == nome, x))
+        if len(forne) > 0:
+            print('Fornecedor existente em nossa base de dados.')
+        else:
+            fornecedor = Fornecedor(nome, telefone, cnpj, categoria)
+            FornecedorDao.salvar(fornecedor)
+            print('Fornecedor cadastrado com sucesso.')
+
+
+    @classmethod
+    def removerFornecedor(cls, removerFor):
+        x = FornecedorDao
+
+
+
+
+
 
 
 
@@ -153,23 +186,4 @@ class EstoqueController:
             else:
                 print('Produto já existe no estoque.')
         else: 
-            ...
-
-
-
-class FornecedorController:
-
-    @classmethod
-    def cadastrar(cls, nome, telefone, cnpj, categoria):
-        existe = False
-        x = ProdutosDao.ler()
-        forne = list(filter(lambda x: x == nome == telefone == cnpj == categoria, x))
-        for i in forne:
-            if i == nome == telefone == cnpj == categoria:
-                existe = True
-        
-        if not existe:
-            ProdutosDao.salvar(nome, telefone, cnpj, categoria)
-            print('Fornecedor cadastrado com sucesso.')
-        else:
-            print('Fornecedor NÃO existe em nossa base de dados.')
+            print('Desculpe... tente novamente')
