@@ -11,12 +11,10 @@ class CategoriaDao:
         with open('categoria.txt', 'a') as arq:
             arq.writelines(categoria + '\n')
 
-
     @classmethod
     def ler_categoria(cls):  # Ler Categoria para exclusão.
         with open('categoria.txt', 'r') as arq:
             cls.categoria = arq.readlines()
-
 
         cate = []
 
@@ -24,18 +22,13 @@ class CategoriaDao:
             for i in cls.categoria:
                 cate.append(Categoria(i))
 
-
         return cate
-
 
     @classmethod
     def lercategoria(cls):  # o usuário visualizar o que há em categoria.
         arquivo = open('categoria.txt', 'r')
         lista_categoria = arquivo.readlines()
         return lista_categoria
-
-
-
 
 
 # CLASSES DA ÁREA DE PRODUTOS:
@@ -47,14 +40,11 @@ class ProdutosDao:
             arq.writelines(produtos.nome + '|' + produtos.preco + '|' + produtos.categoria)
             arq.writelines('\n')
 
-
-
     @classmethod
     def ler(cls):
         with open('produtos.txt', 'r') as arq:
             cls.produto = arq.readlines()
 
-    
         produ = []
 
         if len(cls.produto) > 0:
@@ -62,10 +52,7 @@ class ProdutosDao:
                 i = i.split('|')
                 produ.append(Produtos(i[0], i[1], i[2]))
 
-
         return produ
-
-
 
     @classmethod
     def lerProduto(cls):
@@ -83,7 +70,7 @@ class EstoqueDao:
     @classmethod
     def salvar(cls, produto: Produtos, quantidade):
         with open('estoque.txt', 'a') as arq:
-            arq.writelines(produto.produtos + '|' + str(quantidade))
+            arq.writelines(produto.nome + '|' + produto.preco + '|' + produto.categoria + '|' + str(quantidade))
             arq.writelines('\n')
 
     
@@ -95,19 +82,20 @@ class EstoqueDao:
         forne = []
 
         if len(cls.estoque) > 0:
-            ...
+            for i in cls.estoque:
+                forne.append(i[0], i[1], i[2], i[3])
 
     
 
 
 # CLASSES DE FORNECEDOR:
 
-class Fornecedor:
+class FornecedorDao:
     
     @classmethod
     def salvar(cls, fornecedor: Fornecedor):
         with open('fornecedor.txt', 'a') as arq:
-            arq.writelines(fornecedor.nome + '' + fornecedor.telefone + '' + fornecedor.cnpj + '' + fornecedor.categoria)
+            arq.writelines(fornecedor.nome + '|' + fornecedor.telefone + '|' + fornecedor.cnpj + '|' + fornecedor.categoria)
             arq.writelines('\n')
 
     @classmethod
@@ -115,13 +103,12 @@ class Fornecedor:
         with open('fornecedor.txt', 'r') as arq:
             cls.fornecedor = arq.readlines()
 
-
         fornec = []
 
-        if len(cls.nome) > 0:
-            for i in cls.nome:
-                fornec.append(i)
-
+        if len(cls.fornecedor) > 0:
+            for i in cls.fornecedor:
+                i = i.split('|')
+                fornec.append(Fornecedor(i[0], i[1], i[2], i[3]))
 
         return fornec
 
