@@ -1,7 +1,7 @@
 # é simplesmente uma função Python que recebe uma requisição Web e retorna uma resposta Web.
 
 from controller import CategoriaController, ProdutosController, FornecedorController
-from dao import CategoriaDao, ProdutosDao
+from dao import CategoriaDao, ProdutosDao, FornecedorDao
 
 print('======================= Gerenciamento de Mercearia =======================')
 print()
@@ -107,10 +107,10 @@ while True:
 
         if fornecedor == 'c':
             
-            nomeForne = input('Nome do fornecedor: ')
+            nomeForne = input('Nome do fornecedor: ').upper()
             telefone = input('Número de telefone: ')
             cnpj = input('Digite CNPJ da empresa: ')
-            categoria = input('DIgite a categoria: ')
+            categoria = input('DIgite a categoria: ').upper()
 
             FornecedorController.cadastrar(nome=nomeForne, telefone=telefone, cnpj=cnpj, categoria=categoria)
 
@@ -118,10 +118,26 @@ while True:
 
 
         elif fornecedor == 'r':
-            ...
+            
+            removerFornecedor = input('Nome do fornecedor: ').upper()
+            FornecedorController.removerFornecedor(nomeFornecedor=removerFornecedor)
         
         elif fornecedor == 'a':
-            ...
+            mostrar = FornecedorDao.ler_fornecedores()
+            for i in mostrar:
+                print(i, end=(''))
+
+            alterar = input('Nome do fornecedor: ').upper()
+            print('Informações da alteração do fornecedor')
+            nomeAlt = input('Nome do fornecedor: ').upper()
+            telAlt = input('Digite o telefone: ')
+            cnpjAlt = input('Digite o cnpj: ')
+            catAlt = input('Digite a categoria: ').upper()
+
+            FornecedorController.alterarFornecedor(alterarForne=alterar,nome=nomeAlt,
+            telefone=telAlt, cnpj=cnpjAlt, categoria=catAlt)
+
+
 
         elif fornecedor == 'v':
             continue
