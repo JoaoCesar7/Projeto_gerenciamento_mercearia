@@ -113,6 +113,12 @@ class FornecedorDao:
         return fornec
 
 
+    @classmethod
+    def ler_fornecedores(cls):
+        forne = open('fornecedor.txt', 'r')
+        lista_fornecedores = forne.readlines()
+        return lista_fornecedores
+
 
 
 # CLASSES PESSOAS:
