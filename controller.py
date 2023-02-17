@@ -150,7 +150,7 @@ class FornecedorController:
 
         forne = list(filter(lambda x: x.nome == nome, x))
         if len(forne) > 0:
-            print('Fornecedor existente em nossa base de dados.')
+            print('Fornecedor existe em nossa base de dados.')
         else:
             fornecedor = Fornecedor(nome, telefone, cnpj, categoria)
             FornecedorDao.salvar(fornecedor)
@@ -158,14 +158,48 @@ class FornecedorController:
 
 
     @classmethod
-    def removerFornecedor(cls, removerFor):
-        x = FornecedorDao
+    def removerFornecedor(cls, nomeFornecedor):
+        x = FornecedorDao.ler()
+
+        forne = list(filter(lambda x: x.nome.replace('\n', '') == nomeFornecedor, x))
+        if len(forne) == 0:
+            print('Fornecedor excluido ou NÃO existe em nossa base de dados')
+        else:
+            for i in range(len(x)):
+                if x[i].nome == nomeFornecedor:
+                    del x[i]
+                    break
+
+            print('Fornecedor removido com sucesso.')
+
+            with open('fornecedor.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i.nome + '|' + i.telefone + '|' + i.cnpj + '|' + i.categoria)
 
 
+    @classmethod
+    def alterarFornecedor(cls, alterarForne, nome, telefone, cnpj, categoria):
+        x = FornecedorDao.ler()
+
+        fornecedor = list(filter(lambda x: x.nome.replace('\n', '') == alterarForne, x))
+        if len(fornecedor) == 0:
+            print('Fornecedor NÃO existe em nossa base de dados.')
+        else:
+            for i in range(len(x)):
+                if x[i].nome == alterarForne:
+                    del x[i]
+                    break
+            
+            with open('fornecedor.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i.nome + '|' + i.telefone + '|' + i.cnpj + '|' + i.categoria)
 
 
-
-
+            for i in fornecedor:
+                if not i.nome == nome:
+                    lista = Fornecedor(nome, telefone, cnpj, categoria)
+                    FornecedorDao.salvar(lista)
+                    print('Fornecedor alterado com sucesso.')
 
 
 # CLASSES DA ÁREA DE ESTOQUE:
