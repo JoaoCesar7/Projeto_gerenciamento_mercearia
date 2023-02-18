@@ -54,15 +54,10 @@ class Pessoas:
         self.endereco = endereco
 
 
-class Cliente:
+class Funcionario:
 
     def __init__(self, clt, nome, cpf, email, telefone, endereco):
         self.clt = clt
-        self.nome = nome
-        self.cpf = cpf
-        self.email = email
-        self.telefone = telefone
-        self.endereco = endereco
-
+        super(Funcionario, self).__init__(nome, cpf, email, telefone, endereco)
 
 
