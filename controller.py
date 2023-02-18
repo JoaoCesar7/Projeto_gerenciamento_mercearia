@@ -202,6 +202,13 @@ class FornecedorController:
                     print('Fornecedor alterado com sucesso.')
 
 
+class ClienteController:
+    @classmethod
+    def cadastrarCliente(cls, clt, nome, cpf, email, telefone, endereco):
+        ...
+
+
+
 # CLASSES DA ÁREA DE ESTOQUE:
 
 class EstoqueController:
