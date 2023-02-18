@@ -114,9 +114,6 @@ while True:
 
             FornecedorController.cadastrar(nome=nomeForne, telefone=telefone, cnpj=cnpj, categoria=categoria)
 
-            
-
-
         elif fornecedor == 'r':
             
             removerFornecedor = input('Nome do fornecedor: ').upper()
@@ -137,11 +134,8 @@ while True:
             FornecedorController.alterarFornecedor(alterarForne=alterar,nome=nomeAlt,
             telefone=telAlt, cnpj=cnpjAlt, categoria=catAlt)
 
-
-
         elif fornecedor == 'v':
             continue
-
 
         else:
             print('')
@@ -150,8 +144,30 @@ while True:
             print('')
             continue
 
+    elif decisao2 == 4:
+        cliente = input('[C]adastrar [A]lterar [R]emover: ').lower()
 
+        if cliente == 'c':
+            nomeClt = input('Nome do cliente: ').upper()
+            cpfClt = input('Digite o CPF: ').upper()
+            emailClt = input('Digite seu Email: ').lower()
+            telefoneClt = input('Telefone de contato: ')
+            enderecoclt = input('Digite seu endereço: ').upper()
 
+        elif cliente == 'r':
+            ...
+
+        elif cliente == 'a':
+            ...
+
+        else:
+            print('Desculpe, não consegui fazer sua solicitação')
+
+    elif decisao2 == 5:
+        funcionario = input('[C]adastrar [A]lterar [R]emover: ').lower()
+
+        if funcionario == 'c':
+            ...
 # Tratamento
 
 
