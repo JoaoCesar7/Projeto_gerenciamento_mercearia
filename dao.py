@@ -61,33 +61,6 @@ class ProdutosDao:
         return lista_arquivos
 
 
-
-
-
-# CLASSES DE ESTOQUES:
-
-class EstoqueDao:
-    @classmethod
-    def salvar(cls, produto: Produtos, quantidade):
-        with open('estoque.txt', 'a') as arq:
-            arq.writelines(produto.nome + '|' + produto.preco + '|' + produto.categoria + '|' + str(quantidade))
-            arq.writelines('\n')
-
-    
-    @classmethod
-    def ler(cls):
-        with open('estoque.txt', 'r') as arq:
-            cls.estoque = arq.readlines()
-
-        forne = []
-
-        if len(cls.estoque) > 0:
-            for i in cls.estoque:
-                forne.append(i[0], i[1], i[2], i[3])
-
-    
-
-
 # CLASSES DE FORNECEDOR:
 
 class FornecedorDao:
@@ -121,7 +94,32 @@ class FornecedorDao:
 
 
 
+
+# CLASSES DE ESTOQUES:
+
+class EstoqueDao:
+    @classmethod
+    def salvar(cls, produto: Produtos, quantidade):
+        with open('estoque.txt', 'a') as arq:
+            arq.writelines(produto.nome + '|' + produto.preco + '|' + produto.categoria + '|' + str(quantidade))
+            arq.writelines('\n')
+
+    
+    @classmethod
+    def ler(cls):
+        with open('estoque.txt', 'r') as arq:
+            cls.estoque = arq.readlines()
+
+        forne = []
+
+        if len(cls.estoque) > 0:
+            for i in cls.estoque:
+                forne.append(i[0], i[1], i[2], i[3])
+
+
 # CLASSES PESSOAS:
 
 class Pessoas:
-    ...
+    classmethod
+    def salvar():
+        ...
