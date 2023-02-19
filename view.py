@@ -1,7 +1,7 @@
 # é simplesmente uma função Python que recebe uma requisição Web e retorna uma resposta Web.
 
 from controller import CategoriaController, ProdutosController, FornecedorController
-from dao import CategoriaDao, ProdutosDao, FornecedorDao
+from dao import CategoriaDao, ProdutosDao, FornecedorDao, ClienteDao
 
 print('======================= Gerenciamento de Mercearia =======================')
 print()
