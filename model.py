@@ -44,7 +44,7 @@ class Fornecedor:
 
     
 
-class Pessoas:
+class Cliente:
 
     def __init__(self, nome, cpf, email, telefone, endereco):
         self. nome = nome
