@@ -1,6 +1,6 @@
 # Dal fica responsavel pelo Armazenamento persistente
 
-from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Pessoas, Cliente
+from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Cliente
 
 
 # CLASSES DA ÁREA DE CATEGORIA:
@@ -93,7 +93,29 @@ class FornecedorDao:
         return lista_fornecedores
 
 
+# CLASSES DE CLIENTES
 
+class ClienteDao:
+    @classmethod
+    def salvar(cls, cliente: Cliente):
+        with open('clientes.txt', 'a') as arq:
+            arq.writelines(cliente.nome + '|' + cliente.cpf + 
+            '|' + cliente.email + '|' + cliente.telefone + '|' + cliente.endereco)
+            arq.writelines('\n')
+
+    @classmethod
+    def ler(cls):
+        with open('clientes.txt', 'r') as arq:
+            cls.cliente = arq.readlines()
+
+        clien = []
+
+        if len(cls.cliente) > 0:
+            for i in cls.cliente:
+                i = i.split('|')
+                clien.append(i[0], i[1], i[2], i[3], i[4])
+
+        return clien
 
 # CLASSES DE ESTOQUES:
 
@@ -116,10 +138,5 @@ class EstoqueDao:
             for i in cls.estoque:
                 forne.append(i[0], i[1], i[2], i[3])
 
+        return forne
 
-# CLASSES PESSOAS:
-
-class Pessoas:
-    classmethod
-    def salvar():
-        ...
