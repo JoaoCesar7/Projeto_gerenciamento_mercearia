@@ -1,7 +1,7 @@
 # Controller onde fica as validações do nosso algoritimo.
 
-from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Pessoas
-from dao import CategoriaDao, ProdutosDao, EstoqueDao, FornecedorDao
+from model import Categoria, Produtos, Estoque, Vendas, Fornecedor
+from dao import CategoriaDao, ProdutosDao, EstoqueDao, FornecedorDao, ClienteDao
 
 
 
@@ -201,11 +201,28 @@ class FornecedorController:
                     FornecedorDao.salvar(lista)
                     print('Fornecedor alterado com sucesso.')
 
+#CLASSES DE CLIENTES
 
 class ClienteController:
     @classmethod
-    def cadastrarCliente(cls, clt, nome, cpf, email, telefone, endereco):
-        ...
+    def cadastrarCliente(cls, nome, cpf, email, telefone, endereco):
+        x = ClienteDao.ler()    
+
+        clt = list(filter(lambda x: x.nome.replace('\n', '') == nome, x))
+        if len(clt) == 0:
+            print('Cliente NÃO está cadastrado em nossa base de dados.')
+        else:
+            for i in range(len(x)):
+                print(i)
+
+
+
+
+
+
+
+
+
 
 
 
