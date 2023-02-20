@@ -1,6 +1,6 @@
 # Controller onde fica as validações do nosso algoritimo.
 
-from model import Categoria, Produtos, Estoque, Vendas, Fornecedor
+from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Cliente
 from dao import CategoriaDao, ProdutosDao, EstoqueDao, FornecedorDao, ClienteDao
 
 
@@ -209,16 +209,32 @@ class ClienteController:
         x = ClienteDao.ler()    
 
         clt = list(filter(lambda x: x.nome.replace('\n', '') == nome, x))
-        if len(clt) == 0:
-            print('Cliente NÃO está cadastrado em nossa base de dados.')
+        if len(clt) > 0:
+            print('Cliente existe em nossa base de dados.')
+        else:
+            client = Cliente(nome, cpf, email, telefone, endereco)
+            ClienteDao.salvar(client)
+            print('Cliente cadastrado com sucesso')
+
+    @classmethod
+    def removerCliente(cls, nome_cliente):
+        x = ClienteDao.ler()
+
+        lista = list(filter(lambda x: x.nome.replace('\n', '') == nome_cliente, x))
+        if len(lista) == 0:
+            print('Cliente NÃO existe em nossa base de dados.')
         else:
             for i in range(len(x)):
-                print(i)
+                if x[i].nome == nome_cliente:
+                    del x[i]
+                    break
+            
+            print('Cliente removido com sucesso')
 
-
-
-
-
+            with open('clientes.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
+                
 
 
 
