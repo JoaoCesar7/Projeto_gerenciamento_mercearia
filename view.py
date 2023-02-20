@@ -1,6 +1,6 @@
 # é simplesmente uma função Python que recebe uma requisição Web e retorna uma resposta Web.
 
-from controller import CategoriaController, ProdutosController, FornecedorController
+from controller import CategoriaController, ProdutosController, FornecedorController, ClienteController
 from dao import CategoriaDao, ProdutosDao, FornecedorDao, ClienteDao
 
 print('======================= Gerenciamento de Mercearia =======================')
@@ -154,8 +154,13 @@ while True:
             telefoneClt = input('Telefone de contato: ')
             enderecoclt = input('Digite seu endereço: ').upper()
 
+            ClienteController.cadastrarCliente(nome=nomeClt, cpf=cpfClt, email=emailClt, telefone=telefoneClt, endereco=enderecoclt)
+
         elif cliente == 'r':
-            ...
+            
+            remo_client = input('Digite o nome do cliente que deseja remover: ').upper()
+
+            ClienteController.removerCliente(nome_cliente=remo_client)
 
         elif cliente == 'a':
             ...
