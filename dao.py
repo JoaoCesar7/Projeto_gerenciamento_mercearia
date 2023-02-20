@@ -99,8 +99,7 @@ class ClienteDao:
     @classmethod
     def salvar(cls, cliente: Cliente):
         with open('clientes.txt', 'a') as arq:
-            arq.writelines(cliente.nome + '|' + cliente.cpf + 
-            '|' + cliente.email + '|' + cliente.telefone + '|' + cliente.endereco)
+            arq.writelines(cliente.nome + '|' + cliente.cpf + '|' + cliente.email + '|' + cliente.telefone + '|' + cliente.endereco)
             arq.writelines('\n')
 
     @classmethod
@@ -113,7 +112,7 @@ class ClienteDao:
         if len(cls.cliente) > 0:
             for i in cls.cliente:
                 i = i.split('|')
-                clien.append(i[0], i[1], i[2], i[3], i[4])
+                clien.append(Cliente(i[0], i[1], i[2], i[3], i[4]))
 
         return clien
 
