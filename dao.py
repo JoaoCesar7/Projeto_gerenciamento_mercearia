@@ -116,6 +116,20 @@ class ClienteDao:
 
         return clien
 
+
+    classmethod
+    def ler_clientes():
+        client = open('clientes.txt', 'r')
+        lista_clientes = client.readlines()
+        return lista_clientes
+
+
+
+
+
+
+
+
 # CLASSES DE ESTOQUES:
 
 class EstoqueDao:
