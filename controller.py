@@ -236,6 +236,51 @@ class ClienteController:
                     arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
                 
 
+    @classmethod
+    def alterarCliente(cls, nomeCliente, nome, cpf, email, telefone, endereco):
+        x = ClienteDao.ler()
+
+        lista_client = list(filter(lambda x: x.nome.replace('\n', '') == nomeCliente, x))
+        if len(lista_client) == 0:
+            print('Cliente NÃO existe em nossa base de dados.')
+        else:
+            for i in range(len(x)):
+                if x[i].nome == nomeCliente:
+                    del x[i]
+                    break
+
+            with open('clientes.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i.nome + '|' + i.cpf  + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
+
+            for i in lista_client:
+                if not i.nome == nome:
+                    alterado = Cliente(nome, cpf, email, telefone, endereco)
+                    ClienteDao.salvar(alterado)
+                    print('Cliente alterado com sucesso')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
