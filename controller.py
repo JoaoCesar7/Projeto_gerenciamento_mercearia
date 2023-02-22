@@ -1,7 +1,7 @@
 # Controller onde fica as validações do nosso algoritimo.
 
-from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Cliente
-from dao import CategoriaDao, ProdutosDao, EstoqueDao, FornecedorDao, ClienteDao
+from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Cliente, Funcionario
+from dao import CategoriaDao, ProdutosDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
 
 
 
@@ -201,7 +201,7 @@ class FornecedorController:
                     FornecedorDao.salvar(lista)
                     print('Fornecedor alterado com sucesso.')
 
-#CLASSES DE CLIENTES
+#CLASSES DA ÁREA DE CLIENTES
 
 class ClienteController:
     @classmethod
@@ -259,6 +259,12 @@ class ClienteController:
                     ClienteDao.salvar(alterado)
                     print('Cliente alterado com sucesso')
 
+# CLASSES DA ÁREA DE FUNCIONARIO
+
+class FuncionarioController:
+    classmethod
+    def cadastrarFuncionario(cls, clt, nome, cpf, email, telefone, endereco, numeroClt, serieClt, emissaoClt):
+        x = FuncionarioDao.ler()
 
 
 
