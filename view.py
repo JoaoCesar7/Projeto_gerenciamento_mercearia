@@ -1,7 +1,7 @@
 # é simplesmente uma função Python que recebe uma requisição Web e retorna uma resposta Web.
 
-from controller import CategoriaController, ProdutosController, FornecedorController, ClienteController
-from dao import CategoriaDao, ProdutosDao, FornecedorDao, ClienteDao
+from controller import CategoriaController, ProdutosController, FornecedorController, ClienteController, FuncionarioController
+from dao import CategoriaDao, ProdutosDao, FornecedorDao, ClienteDao, FuncionarioDao
 
 print('======================= Gerenciamento de Mercearia =======================')
 print()
@@ -191,7 +191,30 @@ while True:
         funcionario = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
 
         if funcionario == 'c':
-            ...
+            
+            nome_func = input('Nome do funcionário: ').upper()
+            cpf_func = input('Digite o CPF: ')
+            email_func = input('Digite o email: ').lower()
+            tel_func = input('Telefone de contato: ')
+            end_func = input('Digite o endereço com Nº: ').upper()
+            clt_func = input('Empregado com carteira asssinada [S]im [N]ão: ').lower()
+
+            if clt_func == 's':
+                numero_clt = input('Digite o número da clt: ')
+                serie_clt = input('Digite a serie: ')
+                emissao_clt = input('Data de emissão da clt: ')
+
+                FuncionarioController.cadastrarFuncionario(nome=nome_func, cpf=cpf_func, email=email_func,
+                 telefone=tel_func, endereco=end_func, clt=clt_func, numeroClt=numero_clt, serieClt=serie_clt, emissaoClt=emissao_clt)
+
+            elif clt_func == 'n':
+                FuncionarioController.cadastrarFuncionario(clt=clt_func, nome=nome_func, cpf=cpf_func,
+                email=email_func, telefone=tel_func, endereco=end_func)
+            
+            else:
+                print('Desculpe... Não consegui fazer está solicitação')
+                print('Digite [S]im [N]ão: ')
+                continue
 
         elif funcionario == 'r':
             ...
