@@ -8,6 +8,8 @@ from dao import CategoriaDao, ProdutosDao, EstoqueDao, FornecedorDao, ClienteDao
 # CLASSES DA ÁREA DE CATEGORIA
 
 class CategoriaController:
+
+
     @classmethod
     def cadastrarCategoria(cls, novaCategoria):  # Cadastrar Categoria
         existe = False
@@ -17,12 +19,12 @@ class CategoriaController:
             if i.categoria.replace('\n', '') == novaCategoria:
                 existe = True
 
-
         if not existe:
             CategoriaDao.salvarCategoria(novaCategoria)
             print('Categoria cadastrada com sucesso!')
         else:
             print('A categoria já existe em nossa base de dados.')
+
 
     @classmethod
     def removerCategoria(cls, removerCategoria):  # Remover Categoria
@@ -42,6 +44,7 @@ class CategoriaController:
             with open('categoria.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.categoria)
+
     
     @classmethod
     def alterarCategoria(cls, alterarCategoria, alteradaCategoria):  # Alterar Categoria
@@ -73,6 +76,8 @@ class CategoriaController:
 # CLASSES DA ÁREA DE PRODUTOS
 
 class ProdutosController:
+
+
     @classmethod
     def cadastrarProduto(cls, nome, preco, categoria):
         prod = ProdutosDao.ler()
@@ -89,7 +94,6 @@ class ProdutosController:
                 print('Produto existe no nosso estoque.')
         else:
             print('Categoria inexistente em nossa base de dados.')
-        
 
 
     @classmethod
@@ -143,6 +147,7 @@ class ProdutosController:
 # CLASSE DA ÁREA DE FORNECEDORES
 
 class FornecedorController:
+
 
     @classmethod
     def cadastrar(cls, nome, telefone, cnpj, categoria):
@@ -204,6 +209,8 @@ class FornecedorController:
 #CLASSES DA ÁREA DE CLIENTES
 
 class ClienteController:
+
+
     @classmethod
     def cadastrarCliente(cls, nome, cpf, email, telefone, endereco):
         x = ClienteDao.ler()    
@@ -215,6 +222,7 @@ class ClienteController:
             client = Cliente(nome, cpf, email, telefone, endereco)
             ClienteDao.salvar(client)
             print('Cliente cadastrado com sucesso')
+
 
     @classmethod
     def removerCliente(cls, nome_cliente):
@@ -262,10 +270,28 @@ class ClienteController:
 # CLASSES DA ÁREA DE FUNCIONARIO
 
 class FuncionarioController:
-    classmethod
-    def cadastrarFuncionario(cls, clt, nome, cpf, email, telefone, endereco, numeroClt, serieClt, emissaoClt):
+
+
+    @classmethod
+    def cadastrar_funcionario(cls, nome, cpf, email, telefone, endereco, clt, numeroClt, serieClt, emissaoClt):
         x = FuncionarioDao.ler()
 
+        lista_clt = list(filter(lambda x: x.nome.replace('\n', '') == nome, x))
+        if len(lista_clt) > 0:
+            print('Funcionário existe em nossa base de dados')
+        else:
+            lista = Funcionario(nome, cpf, email, telefone, endereco, clt, numeroClt, serieClt, emissaoClt)
+            FuncionarioDao.salvarComClt(lista)
+            print('Funcionário cadastrado com sucesso')
+
+
+    @classmethod
+    def cadastrar_funcionario_sem_clt(cls, nome, cpf, email, telefone, endereco, clt):
+        x = FuncionarioDao.ler()
+
+        # Passos a seguir
+        # pensando em criar 2 funções, uma para receber os dados do usuário em seguida fazer a recagem se trabalha de carteira assinada ou n
+        # ou a segunda, que seria elaborar 2 condições na mesma função para que consiga validar as informações vinda do usuário.
 
 
 
