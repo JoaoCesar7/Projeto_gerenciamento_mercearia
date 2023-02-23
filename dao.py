@@ -6,10 +6,13 @@ from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Cliente, Fun
 # CLASSES DA ÁREA DE CATEGORIA:
 
 class CategoriaDao:
+
+
     @classmethod
     def salvarCategoria(cls, categoria: Categoria):  # Salvar Categoria.
         with open('categoria.txt', 'a') as arq:
             arq.writelines(categoria + '\n')
+
 
     @classmethod
     def ler_categoria(cls):  # Ler Categoria para exclusão.
@@ -24,6 +27,7 @@ class CategoriaDao:
 
         return cate
 
+
     @classmethod
     def lercategoria(cls):  # o usuário visualizar o que há em categoria.
         arquivo = open('categoria.txt', 'r')
@@ -34,6 +38,8 @@ class CategoriaDao:
 # CLASSES DA ÁREA DE PRODUTOS:
 
 class ProdutosDao:
+
+
     @classmethod
     def salvar(cls, produtos: Produtos): # Salvar Produto
         with open('produtos.txt', 'a') as arq:
@@ -64,6 +70,7 @@ class ProdutosDao:
 # CLASSES DE FORNECEDOR:
 
 class FornecedorDao:
+
     
     @classmethod
     def salvar(cls, fornecedor: Fornecedor):
@@ -96,6 +103,8 @@ class FornecedorDao:
 # CLASSES DE CLIENTES
 
 class ClienteDao:
+
+
     @classmethod
     def salvar(cls, cliente: Cliente):
         with open('clientes.txt', 'a') as arq:
@@ -127,6 +136,8 @@ class ClienteDao:
 # CLASSE DE FUNCIONARIO
 
 class FuncionarioDao:
+
+    
     @classmethod
     def salvarSemClt(cls, funcionario: Funcionario):
         with open('funcionario.txt', 'a') as arq:
@@ -143,7 +154,7 @@ class FuncionarioDao:
             arq.writelines('\n')
 
 
-    classmethod
+    @classmethod
     def ler(cls):
         with open('funcionario.txt', 'r') as arq:
             cls.funcionario = arq.readlines()
