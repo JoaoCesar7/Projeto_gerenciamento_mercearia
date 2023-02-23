@@ -204,12 +204,13 @@ while True:
                 serie_clt = input('Digite a serie: ')
                 emissao_clt = input('Data de emissão da clt: ')
 
-                FuncionarioController.cadastrarFuncionario(nome=nome_func, cpf=cpf_func, email=email_func,
-                 telefone=tel_func, endereco=end_func, clt=clt_func, numeroClt=numero_clt, serieClt=serie_clt, emissaoClt=emissao_clt)
+                FuncionarioController.cadastrar_funcionario(nome=nome_func, cpf=cpf_func, email=email_func,
+                telefone=tel_func, endereco=end_func, clt=clt_func, numeroClt=numero_clt, serieClt=serie_clt, emissaoClt=emissao_clt)
 
             elif clt_func == 'n':
-                FuncionarioController.cadastrarFuncionario(clt=clt_func, nome=nome_func, cpf=cpf_func,
-                email=email_func, telefone=tel_func, endereco=end_func)
+                FuncionarioController.cadastrar_funcionario_sem_clt(nome=nome_func, cpf=cpf_func,
+                email=email_func, telefone=tel_func, endereco=end_func, clt=clt_func)
+
             
             else:
                 print('Desculpe... Não consegui fazer está solicitação')
