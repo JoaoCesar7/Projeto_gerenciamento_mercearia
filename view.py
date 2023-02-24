@@ -197,25 +197,11 @@ while True:
             email_func = input('Digite o email: ').lower()
             tel_func = input('Telefone de contato: ')
             end_func = input('Digite o endereço com Nº: ').upper()
-            clt_func = input('Empregado com carteira asssinada [S]im [N]ão: ').lower()
+            clt_func = input('Empregado com carteira asssinada: ').lower()
 
-            if clt_func == 's':
-                numero_clt = input('Digite o número da clt: ')
-                serie_clt = input('Digite a serie: ')
-                emissao_clt = input('Data de emissão da clt: ')
-
-                FuncionarioController.cadastrar_funcionario(nome=nome_func, cpf=cpf_func, email=email_func,
-                telefone=tel_func, endereco=end_func, clt=clt_func, numeroClt=numero_clt, serieClt=serie_clt, emissaoClt=emissao_clt)
-
-            elif clt_func == 'n':
-                FuncionarioController.cadastrar_funcionario_sem_clt(nome=nome_func, cpf=cpf_func,
-                email=email_func, telefone=tel_func, endereco=end_func, clt=clt_func)
-
-            
-            else:
-                print('Desculpe... Não consegui fazer está solicitação')
-                print('Digite [S]im [N]ão: ')
-                continue
+            FuncionarioController.cadastrar_funcionario(nome=nome_func, cpf=cpf_func, email=email_func,
+            telefone=tel_func, endereco=end_func, clt=clt_func)
+    
 
         elif funcionario == 'r':
             ...
