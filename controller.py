@@ -273,25 +273,16 @@ class FuncionarioController:
 
 
     @classmethod
-    def cadastrar_funcionario(cls, nome, cpf, email, telefone, endereco, clt, numeroClt, serieClt, emissaoClt):
+    def cadastrar_funcionario(cls, nome, cpf, email, telefone, endereco, clt):
         x = FuncionarioDao.ler()
 
         lista_clt = list(filter(lambda x: x.nome.replace('\n', '') == nome, x))
         if len(lista_clt) > 0:
-            print('Funcionário existe em nossa base de dados')
+            print('Funcionário existente em nossa base de dados')
         else:
-            lista = Funcionario(nome, cpf, email, telefone, endereco, clt, numeroClt, serieClt, emissaoClt)
-            FuncionarioDao.salvarComClt(lista)
+            lista = Funcionario(nome, cpf, email, telefone, endereco, clt)
+            FuncionarioDao.salvar(lista)
             print('Funcionário cadastrado com sucesso')
-
-
-    @classmethod
-    def cadastrar_funcionario_sem_clt(cls, nome, cpf, email, telefone, endereco, clt):
-        x = FuncionarioDao.ler()
-
-        # Passos a seguir
-        # pensando em criar 2 funções, uma para receber os dados do usuário em seguida fazer a recagem se trabalha de carteira assinada ou n
-        # ou a segunda, que seria elaborar 2 condições na mesma função para que consiga validar as informações vinda do usuário.
 
 
 
