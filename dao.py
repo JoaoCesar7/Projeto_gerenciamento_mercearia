@@ -139,18 +139,10 @@ class FuncionarioDao:
 
     
     @classmethod
-    def salvarSemClt(cls, funcionario: Funcionario):
+    def salvar(cls, funcionario: Funcionario):
         with open('funcionario.txt', 'a') as arq:
             arq.writelines(funcionario.nome + '|' + funcionario.cpf + '|' + funcionario.email +
             '|' + funcionario.telefone + '|' + funcionario.endereco + '|' + funcionario.clt)
-            arq.writelines('\n')
-
-    @classmethod
-    def salvarComClt(cls, funcionarioClt: Funcionario):
-        with open('funcionario.txt', 'a') as arq:
-            arq.writelines(funcionarioClt.nome + '|' + funcionarioClt.cpf + '|' + funcionarioClt.email + 
-            '|' + funcionarioClt.telefone + '|' + funcionarioClt.endereco + '|' +funcionarioClt.clt + 
-            '|' + funcionarioClt.numeroClt + '|' + funcionarioClt.serieClt + '|' + funcionarioClt.emissaoClt)
             arq.writelines('\n')
 
 
@@ -163,11 +155,10 @@ class FuncionarioDao:
 
         if len(cls.funcionario) > 0:
             for i in cls.funcionario:
-                func.append(i[0], i[1], i[2], i[3], i[4], i[5])
+                i = i.split('|')
+                func.append(Funcionario(i[0], i[1], i[2], i[3], i[4], i[5]))
 
         return func
-
-
 
 
 
