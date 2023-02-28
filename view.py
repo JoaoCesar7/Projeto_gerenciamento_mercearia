@@ -197,7 +197,7 @@ while True:
             email_func = input('Digite o email: ').lower()
             tel_func = input('Telefone de contato: ')
             end_func = input('Digite o endereço com Nº: ').upper()
-            clt_func = input('Empregado com carteira asssinada: ').lower()
+            clt_func = input('Empregado com carteira asssinada: ').upper()
 
             FuncionarioController.cadastrar_funcionario(nome=nome_func, cpf=cpf_func, email=email_func,
             telefone=tel_func, endereco=end_func, clt=clt_func)
@@ -208,8 +208,21 @@ while True:
             nome_funcionario = input('Nome do funcionário: ').upper()
             FuncionarioController.remover_funcionario(remover_func=nome_funcionario)
 
+
         elif funcionario == 'a':
-            ...
+            nome_alterar = input('Digite o nome do funcionário que deseja alterar: ').upper()
+            print('')
+            print('Dados para alteração')
+            print('')
+            nome_f = input('Digite o nome: ').upper()
+            cpf_f = input('Digite o CPF: ')
+            email_f = input('Digite Email: ').lower()
+            telefone_f = input('Número de telefone: ')
+            endereco_f = input('Digite o nome do endereço com número: ').upper()
+            clt_f = input('Carteira assinada: [S]im [N]ão: ').upper()
+
+            FuncionarioController.alterar_funcionario(nome_funcionario=nome_alterar, nome=nome_f, cpf=cpf_f,
+            email=email_f, telefone=telefone_f, endereco=endereco_f, clt=clt_f)
 
         elif funcionario == 'v':
             continue
