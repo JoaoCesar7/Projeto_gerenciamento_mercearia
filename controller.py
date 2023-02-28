@@ -306,11 +306,15 @@ class FuncionarioController:
 
 
     @classmethod
-    def alterar_funcionario(cls, nome_alterado, nome, cpf, email, telefone, endereco, clt):
+    def alterar_funcionario(cls, nome_funcionario, nome, cpf, email, telefone, endereco, clt):
         x = FuncionarioDao.ler()
 
-        lista = list(filter(lambda x: x.nome.replace('\n', '') == nome_alterado, x))
-        print(lista)
+        lista = list(filter(lambda x: x.nome.replace('\n', '') == nome_funcionario, x))
+        if len(lista) == 0:
+            print('Funcionário NÃO existe em nossa base de dados')
+        else:
+            for i in range(len(x)):
+                print(i)
 
 
 
