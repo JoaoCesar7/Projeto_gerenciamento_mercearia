@@ -72,7 +72,6 @@ class CategoriaController:
                 print('Categoria alterada com sucesso!')
 
 
-
 # CLASSES DA ÁREA DE PRODUTOS
 
 class ProdutosController:
@@ -143,7 +142,6 @@ class ProdutosController:
                     print('Produto cadastrado com sucesso.')
 
 
-
 # CLASSE DA ÁREA DE FORNECEDORES
 
 class FornecedorController:
@@ -206,6 +204,7 @@ class FornecedorController:
                     FornecedorDao.salvar(lista)
                     print('Fornecedor alterado com sucesso.')
 
+
 #CLASSES DA ÁREA DE CLIENTES
 
 class ClienteController:
@@ -267,6 +266,7 @@ class ClienteController:
                     ClienteDao.salvar(alterado)
                     print('Cliente alterado com sucesso')
 
+
 # CLASSES DA ÁREA DE FUNCIONARIO
 
 class FuncionarioController:
@@ -285,17 +285,32 @@ class FuncionarioController:
             print('Funcionário cadastrado com sucesso')
 
 
+    @classmethod
+    def remover_funcionario(cls, remover_func):
+        x = FuncionarioDao.ler()
+
+        lista_funcionario = list(map(lambda x: x.nome.replace('\n', '') == remover_func, x))
+        if len(lista_funcionario) == 0:
+            print('Funcionário Não existe em nossa base de dados')
+        else:
+            for i in range(len(x)):
+                if x[i].nome == remover_func:
+                    del x[i]
+                    break
+
+            print('Funcionário cadastrado com sucesso')
+
+            with open('funcionario.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
 
 
+    @classmethod
+    def alterar_funcionario(cls, nome_alterado, nome, cpf, email, telefone, endereco, clt):
+        x = FuncionarioDao.ler()
 
-
-
-
-
-
-
-
-
+        lista = list(filter(lambda x: x.nome.replace('\n', '') == nome_alterado, x))
+        print(lista)
 
 
 
