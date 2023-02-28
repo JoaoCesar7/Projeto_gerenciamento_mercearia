@@ -204,7 +204,9 @@ while True:
     
 
         elif funcionario == 'r':
-            ...
+            
+            nome_funcionario = input('Nome do funcionário: ').upper()
+            FuncionarioController.remover_funcionario(remover_func=nome_funcionario)
 
         elif funcionario == 'a':
             ...
