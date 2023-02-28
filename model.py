@@ -64,7 +64,7 @@ class Cliente:
 class Funcionario(Cliente):
 
 
-    def __init__(self, clt, nome, cpf, email, telefone, endereco):
+    def __init__(self, nome, cpf, email, telefone, endereco, clt):
         self.clt = clt
         super(Funcionario, self).__init__(nome, cpf, email, telefone, endereco)
 
