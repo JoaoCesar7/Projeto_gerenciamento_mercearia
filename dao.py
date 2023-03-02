@@ -37,32 +37,34 @@ class CategoriaDao:
 
 # CLASSES DA ÁREA DE PRODUTOS:
 
-class ProdutosDao:
+class EstoqueDao:
 
 
     @classmethod
-    def salvar(cls, produtos: Produtos): # Salvar Produto
-        with open('produtos.txt', 'a') as arq:
-            arq.writelines(produtos.nome + '|' + produtos.preco + '|' + produtos.categoria)
+    def salvar(cls, produtos: Produtos, quantidade): # Salvar Produto
+        with open('estoque.txt', 'a') as arq:
+            arq.writelines(produtos.nome + '|' + produtos.preco + '|' + produtos.categoria + '|' + quantidade)
             arq.writelines('\n')
 
     @classmethod
     def ler(cls):
-        with open('produtos.txt', 'r') as arq:
-            cls.produto = arq.readlines()
+        with open('estoque.txt', 'r') as arq:
+            cls.estoque = arq.readlines()
 
         produ = []
 
-        if len(cls.produto) > 0:
-            for i in cls.produto:
+        if len(cls.estoque) > 0:
+            for i in cls.estoque:
                 i = i.split('|')
-                produ.append(Produtos(i[0], i[1], i[2]))
+                print(i)
+                produ.append(Produtos(i[0], i[1], i[2], i[3]))
 
         return produ
 
+
     @classmethod
-    def lerProduto(cls):
-        arquivos = open('produtos.txt', 'r')
+    def ler_produto(cls):
+        arquivos = open('estoque.txt', 'r')
         lista_arquivos = arquivos.readlines()
         return lista_arquivos
 
@@ -163,7 +165,7 @@ class FuncionarioDao:
 
 # CLASSES DE ESTOQUES:
 
-class EstoqueDao:
+class Teste:
     @classmethod
     def salvar(cls, produto: Produtos, quantidade):
         with open('estoque.txt', 'a') as arq:
