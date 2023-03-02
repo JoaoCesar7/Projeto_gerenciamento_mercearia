@@ -1,7 +1,7 @@
 # é simplesmente uma função Python que recebe uma requisição Web e retorna uma resposta Web.
 
-from controller import CategoriaController, ProdutosController, FornecedorController, ClienteController, FuncionarioController
-from dao import CategoriaDao, ProdutosDao, FornecedorDao, ClienteDao, FuncionarioDao
+from controller import CategoriaController, EstoqueController, FornecedorController, ClienteController, FuncionarioController
+from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
 
 print('======================= Gerenciamento de Mercearia =======================')
 print()
@@ -10,7 +10,7 @@ print()
 
 
 while True:
-    decisao2 = input('[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [0]Fechar: ')
+    decisao2 = input('[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [6]Caixa [0]Fechar: ')
     decisao2 = int(decisao2)
 
     print('')
@@ -64,7 +64,7 @@ while True:
 
     elif decisao2 == 2:
         produtos = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
-        mostrar = ProdutosDao.lerProduto()
+        mostrar = EstoqueDao.ler_produto()
         for i in mostrar:
             print(i, end='')
     
@@ -73,7 +73,8 @@ while True:
             nome = input('Nome do produto: ').upper()
             preco = input('Valor do produto: R$')
             categoria = input('Categoria do produto: ').upper()
-            ProdutosController.cadastrarProduto(nome=nome, preco=preco, categoria=categoria)
+            quantidade = input('Quantidade do produto em estoque: ')
+            EstoqueController.cadastrarProduto(nome=nome, preco=preco, categoria=categoria, quantidade=quantidade)
    
         elif produtos == 'a':
 
@@ -81,16 +82,16 @@ while True:
             nome_alterado = input('Nome do produto: ').upper()
             valor_alterado = input('Valor do produto: R$').upper()
             categoria_alterada = input('Categoria do produto: ').upper()
-            ProdutosController.alterarProduto(alterarProduto=nome_alterar, nome=nome_alterado, 
+            EstoqueController.alterarProduto(alterarProduto=nome_alterar, nome=nome_alterado, 
             preco=valor_alterado, categoria=categoria_alterada)
 
         elif produtos == 'r':
-            mostrar = ProdutosDao.lerProduto()
+            mostrar = EstoqueDao.lerProduto()
             for i in mostrar:
                 print(i, end='')
 
             produtoRemovido = input('Digite nome do produto que deseja remover: ').upper()
-            ProdutosController.removerProduto(nomeProduto=produtoRemovido)
+            EstoqueController.removerProduto(nomeProduto=produtoRemovido)
 
         elif produtos == 'v':
             continue
@@ -106,7 +107,7 @@ while True:
     
     elif decisao2 == 3:
         fornecedor = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
-        mostrar = FornecedorDao.ler_fornecedores
+        mostrar = FornecedorDao.ler_fornecedores()
         for i in mostrar:
             print(i, end='')
 
@@ -230,14 +231,8 @@ while True:
         else:
             print('Desculpe... Não consegui concluir sua solicitação')
             continue
+    
 
+    if decisao2 == 6:
+        pass
 
-# Tratamento
-
-
-    else:
-        print('Desculpe... Opção desejava inválida. Por favor...')
-        print('Tente novamente')
-        print('Opção abaixo.')
-        print('')
-        continue
