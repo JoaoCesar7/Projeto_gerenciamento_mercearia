@@ -1,7 +1,7 @@
 # Controller onde fica as validações do nosso algoritimo.
 
 from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Cliente, Funcionario
-from dao import CategoriaDao, ProdutosDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
+from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
 
 
 
@@ -74,12 +74,12 @@ class CategoriaController:
 
 # CLASSES DA ÁREA DE PRODUTOS
 
-class ProdutosController:
+class EstoqueController:
 
 
     @classmethod
-    def cadastrarProduto(cls, nome, preco, categoria):
-        prod = ProdutosDao.ler()
+    def cadastrarProduto(cls, nome, preco, categoria, quantidade):
+        prod = EstoqueDao.ler()
         cat = CategoriaDao.ler_categoria()
         x = list(filter(lambda x: x.categoria.replace('\n', '') == categoria, cat))
 
@@ -87,7 +87,7 @@ class ProdutosController:
         if len(x) > 0:
             if len(h) == 0:
                 produto = Produtos(nome, preco, categoria)
-                ProdutosDao.salvar(produto)
+                EstoqueDao.salvar(produto, quantidade)
                 print('Produto Cadastrado com sucesso.')
             else:
                 print('Produto existe no nosso estoque.')
@@ -97,7 +97,7 @@ class ProdutosController:
 
     @classmethod
     def removerProduto(cls, nomeProduto):
-        x = ProdutosDao.ler()
+        x = EstoqueDao.ler()
 
         produ = list(filter(lambda x: x.nome.replace('\n', '') == nomeProduto, x))
         if len(produ) == 0:
@@ -118,7 +118,7 @@ class ProdutosController:
 
     @classmethod
     def alterarProduto(cls, alterarProduto, nome, preco, categoria):
-        x = ProdutosDao.ler()
+        x = EstoqueDao.ler()
 
         pro = list(filter(lambda x: x.nome.replace('\n', '') == alterarProduto, x))
         if len(pro) == 0:
@@ -138,7 +138,7 @@ class ProdutosController:
             for i in pro:
                 if not i.nome == nome: 
                     produtos = Produtos(nome, preco, categoria)
-                    ProdutosDao.salvar(produtos)
+                    EstoqueDao.salvar(produtos)
                     print('Produto cadastrado com sucesso.')
 
 
@@ -314,37 +314,61 @@ class FuncionarioController:
             print('Funcionário NÃO existe em nossa base de dados')
         else:
             for i in range(len(x)):
-                print(i)
+                if x[i].nome == nome_funcionario:
+                    del x[i]
+                    break
 
+            with open('funcionario.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
 
-
-
-
-
-
-
-
-
-
-
+            for i in lista:
+                if not i.nome == nome:
+                    fun = Funcionario(nome, cpf, email, telefone, endereco, clt)
+                    FuncionarioDao.salvar(fun)
+                    print('Funcionário alterado com sucesso')
 
 
 # CLASSES DA ÁREA DE ESTOQUE:
 
-class EstoqueController:
+class Exemplo:
+
     @classmethod
-    def cadastrarEstoque(cls, nome, preco, categoria, quantidade):
+    def cadastrarEstoque(cls, nome, preco, categoria, produtos, quantidade):
         x = EstoqueDao.ler()
         y = CategoriaDao.ler_categoria()
-        z = list(filter(lambda x: x.categoria == categoria, y))
+        z = list(filter(lambda x: x.nome == produtos, y))
 
-        est = list(filter(lambda x: x.nome == nome, x))
+        est = list(filter(lambda x: x.nome == produtos, x))
         if len(z) > 0:
             if len(est) == 0:
-                produto = Produtos(nome, preco, categoria)
-                EstoqueDao.salvar(produto, quantidade)
+                produto = Produtos(produtos, quantidade)
+                EstoqueDao.salvar(produto)
                 print('Produto cadastrado com sucesso.')
             else:
                 print('Produto já existe no estoque.')
         else: 
             print('Desculpe... tente novamente')
+
+
+
+class VendasController:
+
+
+    @classmethod
+    def caixa(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, datatime):
+        pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
