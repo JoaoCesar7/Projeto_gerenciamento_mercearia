@@ -31,11 +31,11 @@ class Estoque:
 class Vendas:
 
 
-    def __init__(self, itensVendidos: Produtos, vendedor, comprador, quantidadeVendida, datatime: date):
-        self.itensVendidos = itensVendidos
+    def __init__(self, itens_vendidos: Produtos, vendedor, comprador, quantidade_vendida, datatime: date):
+        self.itens_vendidos = itens_vendidos
         self.vendedor = vendedor
         self.comprador = comprador
-        self.quantidadeVendida = quantidadeVendida
+        self.quantidade_vendida = quantidade_vendida
         datatime = datatime
 
 
