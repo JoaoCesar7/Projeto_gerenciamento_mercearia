@@ -1,22 +1,22 @@
 # Dal fica responsavel pelo Armazenamento persistente
 
-from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Cliente, Funcionario
+from model import Categoria, Produtos, Vendas, Fornecedor, Cliente, Funcionario
+
+DATA_BASE = 'data_base/'
 
 
 # CLASSES DA ÁREA DE CATEGORIA:
 
 class CategoriaDao:
 
-
     @classmethod
     def salvarCategoria(cls, categoria: Categoria):  # Salvar Categoria.
-        with open('categoria.txt', 'a') as arq:
+        with open(DATA_BASE + 'categoria.txt', 'a') as arq:
             arq.writelines(categoria + '\n')
-
 
     @classmethod
     def ler_categoria(cls):  # Ler Categoria para exclusão.
-        with open('categoria.txt', 'r') as arq:
+        with open(DATA_BASE + 'categoria.txt', 'r') as arq:
             cls.categoria = arq.readlines()
 
         cate = []
@@ -27,10 +27,9 @@ class CategoriaDao:
 
         return cate
 
-
     @classmethod
     def lercategoria(cls):  # o usuário visualizar o que há em categoria.
-        arquivo = open('categoria.txt', 'r')
+        arquivo = open(DATA_BASE + 'categoria.txt', 'r')
         lista_categoria = arquivo.readlines()
         return lista_categoria
 
@@ -39,16 +38,19 @@ class CategoriaDao:
 
 class EstoqueDao:
 
-
     @classmethod
-    def salvar(cls, produtos: Produtos, quantidade): # Salvar Produto
-        with open('estoque.txt', 'a') as arq:
-            arq.writelines(produtos.nome + '|' + produtos.preco + '|' + produtos.categoria + '|' + quantidade)
-            arq.writelines('\n')
+    def salvar(cls, produtos: Produtos):  # Recebendo produtos da model
+        with open(DATA_BASE + 'estoque.txt', 'a') as arq:
+            arq.writelines(
+                produtos.nome + '|' +
+                produtos.preco + '|' +
+                produtos.categoria + '|' +
+                produtos.quantidade + '\n'
+            )
 
     @classmethod
     def ler(cls):
-        with open('estoque.txt', 'r') as arq:
+        with open(DATA_BASE + 'estoque.txt', 'r') as arq:
             cls.estoque = arq.readlines()
 
         produ = []
@@ -56,15 +58,13 @@ class EstoqueDao:
         if len(cls.estoque) > 0:
             for i in cls.estoque:
                 i = i.split('|')
-                print(i)
                 produ.append(Produtos(i[0], i[1], i[2], i[3]))
 
         return produ
 
-
     @classmethod
     def ler_produto(cls):
-        arquivos = open('estoque.txt', 'r')
+        arquivos = open(DATA_BASE + 'estoque.txt', 'r')
         lista_arquivos = arquivos.readlines()
         return lista_arquivos
 
@@ -73,16 +73,16 @@ class EstoqueDao:
 
 class FornecedorDao:
 
-    
     @classmethod
     def salvar(cls, fornecedor: Fornecedor):
-        with open('fornecedor.txt', 'a') as arq:
-            arq.writelines(fornecedor.nome + '|' + fornecedor.telefone + '|' + fornecedor.cnpj + '|' + fornecedor.categoria)
+        with open(DATA_BASE + 'fornecedor.txt', 'a') as arq:
+            arq.writelines(
+                fornecedor.nome + '|' + fornecedor.telefone + '|' + fornecedor.cnpj + '|' + fornecedor.categoria)
             arq.writelines('\n')
 
     @classmethod
     def ler(cls):
-        with open('fornecedor.txt', 'r') as arq:
+        with open(DATA_BASE + 'fornecedor.txt', 'r') as arq:
             cls.fornecedor = arq.readlines()
 
         fornec = []
@@ -94,10 +94,9 @@ class FornecedorDao:
 
         return fornec
 
-
     @classmethod
     def ler_fornecedores(cls):
-        forne = open('fornecedor.txt', 'r')
+        forne = open(DATA_BASE + 'fornecedor.txt', 'r')
         lista_fornecedores = forne.readlines()
         return lista_fornecedores
 
@@ -106,16 +105,16 @@ class FornecedorDao:
 
 class ClienteDao:
 
-
     @classmethod
     def salvar(cls, cliente: Cliente):
-        with open('clientes.txt', 'a') as arq:
-            arq.writelines(cliente.nome + '|' + cliente.cpf + '|' + cliente.email + '|' + cliente.telefone + '|' + cliente.endereco)
+        with open(DATA_BASE + 'clientes.txt', 'a') as arq:
+            arq.writelines(
+                cliente.nome + '|' + cliente.cpf + '|' + cliente.email + '|' + cliente.telefone + '|' + cliente.endereco)
             arq.writelines('\n')
 
     @classmethod
     def ler(cls):
-        with open('clientes.txt', 'r') as arq:
+        with open(DATA_BASE + 'clientes.txt', 'r') as arq:
             cls.cliente = arq.readlines()
 
         clien = []
@@ -127,10 +126,10 @@ class ClienteDao:
 
         return clien
 
-
     classmethod
+
     def ler_clientes():
-        client = open('clientes.txt', 'r')
+        client = open(DATA_BASE + 'clientes.txt', 'r')
         lista_clientes = client.readlines()
         return lista_clientes
 
@@ -139,17 +138,21 @@ class ClienteDao:
 
 class FuncionarioDao:
 
-    
     @classmethod
     def salvar(cls, funcionario: Funcionario):
-        with open('funcionario.txt', 'a') as arq:
-            arq.writelines(funcionario.nome + '|' + funcionario.cpf + '|' + funcionario.email + '|' + funcionario.telefone + '|' + funcionario.endereco + '|' + funcionario.clt)
-            arq.writelines('\n')
-
+        with open(DATA_BASE + 'funcionario.txt', 'a') as arq:
+            arq.writelines(
+                funcionario.nome + '|' +
+                funcionario.cpf + '|' +
+                funcionario.email + '|' +
+                funcionario.telefone + '|' +
+                funcionario.endereco + '|' +
+                funcionario.clt + '\n'
+            )
 
     @classmethod
     def ler(cls):
-        with open('funcionario.txt', 'r') as arq:
+        with open(DATA_BASE + 'funcionario.txt', 'r') as arq:
             cls.funcionario = arq.readlines()
 
         func = []
@@ -162,20 +165,18 @@ class FuncionarioDao:
         return func
 
 
-
 # CLASSES DE ESTOQUES:
 
 class Teste:
     @classmethod
     def salvar(cls, produto: Produtos, quantidade):
-        with open('estoque.txt', 'a') as arq:
+        with open(DATA_BASE + 'estoque.txt', 'a') as arq:
             arq.writelines(produto.nome + '|' + produto.preco + '|' + produto.categoria + '|' + str(quantidade))
             arq.writelines('\n')
 
-    
     @classmethod
     def ler(cls):
-        with open('estoque.txt', 'r') as arq:
+        with open(DATA_BASE + 'estoque.txt', 'r') as arq:
             cls.estoque = arq.readlines()
 
         forne = []
@@ -185,4 +186,3 @@ class Teste:
                 forne.append(i[0], i[1], i[2], i[3])
 
         return forne
-
