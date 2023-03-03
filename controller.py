@@ -1,21 +1,19 @@
 # Controller onde fica as validações do nosso algoritimo.
 
-from model import Categoria, Produtos, Estoque, Vendas, Fornecedor, Cliente, Funcionario
+from model import Categoria, Produtos, Vendas, Fornecedor, Cliente, Funcionario
 from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
-
 
 
 # CLASSES DA ÁREA DE CATEGORIA
 
 class CategoriaController:
 
-
     @classmethod
     def cadastrarCategoria(cls, novaCategoria):  # Cadastrar Categoria
         existe = False
-        cateDal = CategoriaDao.ler_categoria()  
+        cateDal = CategoriaDao.ler_categoria()
         print('')
-        for i in cateDal: 
+        for i in cateDal:
             if i.categoria.replace('\n', '') == novaCategoria:
                 existe = True
 
@@ -24,7 +22,6 @@ class CategoriaController:
             print('Categoria cadastrada com sucesso!')
         else:
             print('A categoria já existe em nossa base de dados.')
-
 
     @classmethod
     def removerCategoria(cls, removerCategoria):  # Remover Categoria
@@ -38,14 +35,13 @@ class CategoriaController:
                 if x[i].categoria.replace('\n', '') == removerCategoria:
                     del x[i]
                     break
-            
+
             print('Categoria removida com sucesso.')
 
             with open('categoria.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.categoria)
 
-    
     @classmethod
     def alterarCategoria(cls, alterarCategoria, alteradaCategoria):  # Alterar Categoria
         y = CategoriaDao.ler_categoria()
@@ -64,7 +60,7 @@ class CategoriaController:
                     arq.writelines(i.categoria)
 
             existe = False
-            for i in y: 
+            for i in y:
                 if i.categoria.replace('\n', '') == alteradaCategoria:
                     existe = True
             if not existe:
@@ -76,35 +72,33 @@ class CategoriaController:
 
 class EstoqueController:
 
-
     @classmethod
-    def cadastrarProduto(cls, nome, preco, categoria, quantidade):
+    def cadastrar_produto(cls, nome, preco, categoria, quantidade):
         prod = EstoqueDao.ler()
         cat = CategoriaDao.ler_categoria()
         x = list(filter(lambda x: x.categoria.replace('\n', '') == categoria, cat))
 
-        h = list(filter(lambda x: x.nome == nome, prod))
+        h = list(filter(lambda x: x.nome.replace('\n', '') == nome, prod))
         if len(x) > 0:
             if len(h) == 0:
-                produto = Produtos(nome, preco, categoria)
-                EstoqueDao.salvar(produto, quantidade)
+                produto = Produtos(nome, preco, categoria, quantidade)
+                EstoqueDao.salvar(produto)
                 print('Produto Cadastrado com sucesso.')
             else:
                 print('Produto existe no nosso estoque.')
         else:
             print('Categoria inexistente em nossa base de dados.')
 
-
     @classmethod
-    def removerProduto(cls, nomeProduto):
+    def remover_produto(cls, nome_produto):
         x = EstoqueDao.ler()
 
-        produ = list(filter(lambda x: x.nome.replace('\n', '') == nomeProduto, x))
+        produ = list(filter(lambda x: x.nome.replace('\n', '') == nome_produto, x))
         if len(produ) == 0:
             print('Não existe esse produto em nossa base de dados.')
         else:
             for i in range(len(x)):
-                if x[i].nome.replace('\n', '') == nomeProduto:
+                if x[i].nome.replace('\n', '') == nome_produto:
                     del x[i]
                     break
 
@@ -114,29 +108,27 @@ class EstoqueController:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria)
 
-
-
     @classmethod
-    def alterarProduto(cls, alterarProduto, nome, preco, categoria):
+    def alterar_produto(cls, alterar_produto, nome, preco, categoria):
         x = EstoqueDao.ler()
 
-        pro = list(filter(lambda x: x.nome.replace('\n', '') == alterarProduto, x))
+        pro = list(filter(lambda x: x.nome.replace('\n', '') == alterar_produto, x))
         if len(pro) == 0:
             print('Produto NÃO existe em nossa base de dados.')
         else:
             for i in range(len(x)):
-                if x[i].nome.replace('\n', '') == alterarProduto:
+                if x[i].nome.replace('\n', '') == alterar_produto:
                     del x[i]
                     break
-            
+
             print('Produto em processo de alteração')
 
             with open('produtos.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria)
-        
+
             for i in pro:
-                if not i.nome == nome: 
+                if not i.nome == nome:
                     produtos = Produtos(nome, preco, categoria)
                     EstoqueDao.salvar(produtos)
                     print('Produto cadastrado com sucesso.')
@@ -145,7 +137,6 @@ class EstoqueController:
 # CLASSE DA ÁREA DE FORNECEDORES
 
 class FornecedorController:
-
 
     @classmethod
     def cadastrar(cls, nome, telefone, cnpj, categoria):
@@ -159,17 +150,16 @@ class FornecedorController:
             FornecedorDao.salvar(fornecedor)
             print('Fornecedor cadastrado com sucesso.')
 
-
     @classmethod
-    def removerFornecedor(cls, nomeFornecedor):
+    def remover_fornecedor(cls, nome_fornecedor):
         x = FornecedorDao.ler()
 
-        forne = list(filter(lambda x: x.nome.replace('\n', '') == nomeFornecedor, x))
+        forne = list(filter(lambda x: x.nome.replace('\n', '') == nome_fornecedor, x))
         if len(forne) == 0:
             print('Fornecedor excluido ou NÃO existe em nossa base de dados')
         else:
             for i in range(len(x)):
-                if x[i].nome == nomeFornecedor:
+                if x[i].nome == nome_fornecedor:
                     del x[i]
                     break
 
@@ -178,7 +168,6 @@ class FornecedorController:
             with open('fornecedor.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.telefone + '|' + i.cnpj + '|' + i.categoria)
-
 
     @classmethod
     def alterarFornecedor(cls, alterarForne, nome, telefone, cnpj, categoria):
@@ -192,11 +181,10 @@ class FornecedorController:
                 if x[i].nome == alterarForne:
                     del x[i]
                     break
-            
+
             with open('fornecedor.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.telefone + '|' + i.cnpj + '|' + i.categoria)
-
 
             for i in fornecedor:
                 if not i.nome == nome:
@@ -205,14 +193,13 @@ class FornecedorController:
                     print('Fornecedor alterado com sucesso.')
 
 
-#CLASSES DA ÁREA DE CLIENTES
+# CLASSES DA ÁREA DE CLIENTES
 
 class ClienteController:
 
-
     @classmethod
     def cadastrarCliente(cls, nome, cpf, email, telefone, endereco):
-        x = ClienteDao.ler()    
+        x = ClienteDao.ler()
 
         clt = list(filter(lambda x: x.nome.replace('\n', '') == nome, x))
         if len(clt) > 0:
@@ -221,7 +208,6 @@ class ClienteController:
             client = Cliente(nome, cpf, email, telefone, endereco)
             ClienteDao.salvar(client)
             print('Cliente cadastrado com sucesso')
-
 
     @classmethod
     def removerCliente(cls, nome_cliente):
@@ -235,13 +221,12 @@ class ClienteController:
                 if x[i].nome == nome_cliente:
                     del x[i]
                     break
-            
+
             print('Cliente removido com sucesso')
 
             with open('clientes.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
-                
 
     @classmethod
     def alterarCliente(cls, nomeCliente, nome, cpf, email, telefone, endereco):
@@ -258,7 +243,7 @@ class ClienteController:
 
             with open('clientes.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome + '|' + i.cpf  + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
+                    arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
 
             for i in lista_client:
                 if not i.nome == nome:
@@ -271,7 +256,6 @@ class ClienteController:
 
 class FuncionarioController:
 
-
     @classmethod
     def cadastrar_funcionario(cls, nome, cpf, email, telefone, endereco, clt):
         x = FuncionarioDao.ler()
@@ -283,7 +267,6 @@ class FuncionarioController:
             lista = Funcionario(nome, cpf, email, telefone, endereco, clt)
             FuncionarioDao.salvar(lista)
             print('Funcionário cadastrado com sucesso')
-
 
     @classmethod
     def remover_funcionario(cls, remover_func):
@@ -302,8 +285,8 @@ class FuncionarioController:
 
             with open('funcionario.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
-
+                    arq.writelines(
+                        i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
 
     @classmethod
     def alterar_funcionario(cls, nome_funcionario, nome, cpf, email, telefone, endereco, clt):
@@ -320,7 +303,8 @@ class FuncionarioController:
 
             with open('funcionario.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
+                    arq.writelines(
+                        i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
 
             for i in lista:
                 if not i.nome == nome:
@@ -347,28 +331,12 @@ class Exemplo:
                 print('Produto cadastrado com sucesso.')
             else:
                 print('Produto já existe no estoque.')
-        else: 
+        else:
             print('Desculpe... tente novamente')
-
 
 
 class VendasController:
 
-
     @classmethod
     def caixa(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, datatime):
         pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
