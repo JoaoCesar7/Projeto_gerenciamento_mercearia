@@ -1,11 +1,9 @@
 # modelagem dos dados
 
-
 from datetime import date
 
 
 class Categoria:
-
 
     def __init__(self, categoria):
         self.categoria = categoria
@@ -13,23 +11,14 @@ class Categoria:
 
 class Produtos:
 
-
-    def __init__(self, nome, preco, categoria):
+    def __init__(self, nome, preco, categoria, quantidade):
         self.nome = nome
         self.preco = preco
         self.categoria = categoria
-
-
-class Estoque:
-
-
-    def __init__(self, produtos: Produtos, quantidade):
-        self.produtos = produtos
         self.quantidade = quantidade
 
 
 class Vendas:
-
 
     def __init__(self, itens_vendidos: Produtos, vendedor, comprador, quantidade_vendida, datatime: date):
         self.itens_vendidos = itens_vendidos
@@ -41,7 +30,6 @@ class Vendas:
 
 class Fornecedor:
 
-
     def __init__(self, nome, telefone, cnpj, categoria):
         self.nome = nome
         self.telefone = telefone
@@ -51,7 +39,6 @@ class Fornecedor:
 
 class Cliente:
 
-
     def __init__(self, nome, cpf, email, telefone, endereco):
         self.nome = nome
         self.cpf = cpf
@@ -60,13 +47,8 @@ class Cliente:
         self.endereco = endereco
 
 
-
 class Funcionario(Cliente):
-
 
     def __init__(self, nome, cpf, email, telefone, endereco, clt):
         self.clt = clt
         super(Funcionario, self).__init__(nome, cpf, email, telefone, endereco)
-
-
-
