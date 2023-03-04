@@ -3,6 +3,7 @@
 from model import Categoria, Produtos, Vendas, Fornecedor, Cliente, Funcionario
 from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
 
+DATA_BASE = 'data_base/'
 
 # CLASSES DA ÁREA DE CATEGORIA
 
@@ -38,7 +39,7 @@ class CategoriaController:
 
             print('Categoria removida com sucesso.')
 
-            with open('categoria.txt', 'w') as arq:
+            with open(DATA_BASE + 'categoria.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.categoria)
 
@@ -55,9 +56,11 @@ class CategoriaController:
                     del y[i]
                     break
 
-            with open('categoria.txt', 'w') as arq:
+            with open(DATA_BASE + 'categoria.txt', 'w') as arq:
                 for i in y:
                     arq.writelines(i.categoria)
+
+            print('Categoria alterada com sucesso')
 
             existe = False
             for i in y:
@@ -104,12 +107,12 @@ class EstoqueController:
 
             print('Produto removido com sucesso')
 
-            with open('produtos.txt', 'w') as arq:
+            with open(DATA_BASE + 'estoque.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria)
+                    arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria + '|' + i.quantidade)
 
     @classmethod
-    def alterar_produto(cls, alterar_produto, nome, preco, categoria):
+    def alterar_produto(cls, alterar_produto, nome, preco, categoria, quantidade):
         x = EstoqueDao.ler()
 
         pro = list(filter(lambda x: x.nome.replace('\n', '') == alterar_produto, x))
@@ -123,13 +126,13 @@ class EstoqueController:
 
             print('Produto em processo de alteração')
 
-            with open('produtos.txt', 'w') as arq:
+            with open(DATA_BASE + 'estoque.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria)
+                    arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria + '|' + quantidade)
 
             for i in pro:
                 if not i.nome == nome:
-                    produtos = Produtos(nome, preco, categoria)
+                    produtos = Produtos(nome, preco, categoria, quantidade)
                     EstoqueDao.salvar(produtos)
                     print('Produto cadastrado com sucesso.')
 
@@ -165,7 +168,7 @@ class FornecedorController:
 
             print('Fornecedor removido com sucesso.')
 
-            with open('fornecedor.txt', 'w') as arq:
+            with open(DATA_BASE + 'fornecedor.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.telefone + '|' + i.cnpj + '|' + i.categoria)
 
@@ -182,7 +185,7 @@ class FornecedorController:
                     del x[i]
                     break
 
-            with open('fornecedor.txt', 'w') as arq:
+            with open(DATA_BASE + 'fornecedor.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.telefone + '|' + i.cnpj + '|' + i.categoria)
 
@@ -224,7 +227,7 @@ class ClienteController:
 
             print('Cliente removido com sucesso')
 
-            with open('clientes.txt', 'w') as arq:
+            with open(DATA_BASE + 'clientes.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
 
@@ -241,7 +244,7 @@ class ClienteController:
                     del x[i]
                     break
 
-            with open('clientes.txt', 'w') as arq:
+            with open(DATA_BASE + 'clientes.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
 
@@ -283,7 +286,7 @@ class FuncionarioController:
 
             print('Funcionário cadastrado com sucesso')
 
-            with open('funcionario.txt', 'w') as arq:
+            with open(DATA_BASE + 'funcionario.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(
                         i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
@@ -301,7 +304,7 @@ class FuncionarioController:
                     del x[i]
                     break
 
-            with open('funcionario.txt', 'w') as arq:
+            with open(DATA_BASE + 'funcionario.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(
                         i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
@@ -334,9 +337,12 @@ class Exemplo:
         else:
             print('Desculpe... tente novamente')
 
+# CAIXA
 
 class VendasController:
 
     @classmethod
     def caixa(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, datatime):
-        pass
+        list_estoque = EstoqueDao.ler()
+        
+        
