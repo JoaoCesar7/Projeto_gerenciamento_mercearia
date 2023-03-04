@@ -167,11 +167,11 @@ class FuncionarioDao:
 
 # CLASSES DE ESTOQUES:
 
-class Teste:
+class Venda:
     @classmethod
-    def salvar(cls, produto: Produtos, quantidade):
-        with open(DATA_BASE + 'estoque.txt', 'a') as arq:
-            arq.writelines(produto.nome + '|' + produto.preco + '|' + produto.categoria + '|' + str(quantidade))
+    def salvar(cls, vendas: Vendas):
+        with open(DATA_BASE + 'vendas.txt', 'a') as arq:
+            arq.writelines()
             arq.writelines('\n')
 
     @classmethod
