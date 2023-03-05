@@ -321,7 +321,7 @@ class FuncionarioController:
 class Exemplo:
 
     @classmethod
-    def cadastrarEstoque(cls, nome, preco, categoria, produtos, quantidade):
+    def cadastrarEstoque(cls, produtos, quantidade):
         x = EstoqueDao.ler()
         y = CategoriaDao.ler_categoria()
         z = list(filter(lambda x: x.nome == produtos, y))
@@ -342,7 +342,23 @@ class Exemplo:
 class VendasController:
 
     @classmethod
-    def caixa(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, datatime):
+    def caixa_controller(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, datatime):
         list_estoque = EstoqueDao.ler()
+        list_funcionario = FuncionarioDao.ler()
+        list_cliente = ClienteDao.ler()
+
+        estoque = list(filter(lambda est: est.nome == itens_vendidos, list_estoque)) 
+        funcionario = list(filter(lambda func: func.nome == vendedor, list_funcionario))
+        cliente = list(lambda client: client.cpf == comprador, list_cliente)
+
+        if len(estoque) > 0:
+            if len(funcionario) > 0:
+                pass
+
+
+    
+    # tenho que receber os dados da view, como dos itens vendidos,
+    # cpf ou nome do comprador, quantidade vendida e data, em seguida
+    # fazer as validações e verificações necessarias.
         
         
