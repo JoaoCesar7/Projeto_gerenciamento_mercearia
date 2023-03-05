@@ -5,7 +5,8 @@ from controller import (
     EstoqueController,
     FornecedorController,
     ClienteController,
-    FuncionarioController
+    FuncionarioController,
+    VendasController
 )
 from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
 
@@ -234,17 +235,25 @@ while True:
             continue
         
     elif decisao == 6:
-        decisao_user6 = input('[1]Venda [2]Sair: ').lower()
+        decisao_user6 = input('[1]Venda [2]Sair: ')
+        decisao_user6 = int(decisao_user6)
+
 
         if decisao_user6 == 1:
             
-            venda = input('Nome do produto ')
+            itens_vendidos = input('Nome do produto: ').upper()
+            vendedor_caixa = input('Nome do funcionário: ').upper()
+            comprador = input('CPF do comprador: ').upper()
+            quant =input('Quantidade vendida: ') 
+            data = input('Data da venda: ')
 
+            VendasController.caixa_controller(itens_vendidos=itens_vendidos,
+                                            vendedor=vendedor_caixa, comprador=comprador,
+                                            quantidade_vendida=quant, datatime=data)
 
 
         elif decisao_user6 == 2:
             pass
-
 
 
         else:
