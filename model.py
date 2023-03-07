@@ -25,7 +25,7 @@ class Vendas:
         self.vendedor = vendedor
         self.comprador = comprador
         self.quantidade_vendida = quantidade_vendida
-        datatime = datatime
+        datatime = datatime.today()
 
 
 class Fornecedor:
