@@ -163,6 +163,14 @@ class FuncionarioDao:
                 func.append(Funcionario(i[0], i[1], i[2], i[3], i[4], i[5]))
 
         return func
+    
+    @classmethod
+
+    def lista_funcionario(cls):
+        
+        funcionario = open(DATA_BASE + 'funcionario.txt', 'r')
+        lista_funcionario = funcionario.readlines()
+        return lista_funcionario
 
 
 # CLASSES DE ESTOQUES:
