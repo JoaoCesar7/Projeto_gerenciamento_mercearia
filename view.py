@@ -10,6 +10,7 @@ from controller import (
 )
 from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
 
+
 print('======================= Gerenciamento de Mercearia =======================')
 print()
 print()
@@ -27,29 +28,25 @@ while True:
     if decisao == 1:
         decisao_user = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
 
+        mostrar = CategoriaDao.lercategoria()
+        for i in mostrar:
+            print(i, end='')  # Mostrar lista de categoria pro usuário
+    
         if decisao_user == 'c':
-            mostrar = CategoriaDao.lercategoria()
-            for i in mostrar:
-                print(i, end='')
+
             nome_categoria = input('Nome da categoria: ').upper()
             CategoriaController.cadastrarCategoria(nome_categoria)  # Chamando controller      
 
         elif decisao_user == 'a':
-            x = CategoriaDao.lercategoria()
-            for i in x:
-                print(i, end='')
+
             alterar_categoria = input('Digite o nome da categoria que deseja alterar: ').upper()
             alterada_categoria = input('Digite o nome da nova categoria alterada: ').upper()
             CategoriaController.alterarCategoria(alterarCategoria=alterar_categoria,
                                                  alteradaCategoria=alterada_categoria)
 
         elif decisao_user == 'r':
-            x = CategoriaDao.lercategoria()
-            for i in x:
-                print(i, end="")
 
             indice_categoria = input('Digite o nome da categoria que dejesa remover: ').upper()
-
             CategoriaController.removerCategoria(indice_categoria)
 
         elif decisao_user == 'v':
@@ -62,12 +59,13 @@ while True:
             print('')
             continue
 
-    # Área de Produtos
+    # ÁREA DE PRODUTOS
+
     elif decisao == 2:
         decisao_user2 = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
         mostrar = EstoqueDao.ler_produto()
         for i in mostrar:
-            print(i, end='')
+            print(i, end='')  # Print da lista de produtos(estoque) pro usuário
 
         if decisao_user2 == 'c':
 
@@ -90,9 +88,6 @@ while True:
                             preco=valor_alterado, categoria=categoria_alterada, quantidade=quantidade_alterada)
 
         elif decisao_user2 == 'r':
-            mostrar = EstoqueDao.ler_produto()
-            for i in mostrar:
-                print(i, end='')
 
             produtoRemovido = input('Digite nome do produto que deseja remover: ').upper()
             EstoqueController.remover_produto(nome_produto=produtoRemovido)
@@ -113,7 +108,7 @@ while True:
         decisao_user3 = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
         mostrar = FornecedorDao.ler_fornecedores()
         for i in mostrar:
-            print(i, end='')
+            print(i, end='')  # mostrar lista de fornecedor pro usuário
 
         if decisao_user3 == 'c':
 
@@ -195,8 +190,14 @@ while True:
         else:
             print('Desculpe, não consegui fazer sua solicitação')
 
+    # ÁREA DE FUNCIONÁRIO
+
     elif decisao == 5:
         decisao_user5 = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
+
+        mostrar = FuncionarioDao.lista_funcionario()
+        for i in mostrar:
+            print(i, end='')
 
         if decisao_user5 == 'c':
 
@@ -234,22 +235,31 @@ while True:
         elif decisao_user5 == 'v':
             continue
         
+    #ÁREA DE CAIXA 
+
     elif decisao == 6:
         decisao_user6 = input('[1]Venda [2]Sair: ')
         decisao_user6 = int(decisao_user6)
 
 
         if decisao_user6 == 1:
-            
-            itens_vendidos = input('Nome do produto: ').upper()
+            # mostrar = EstoqueDao.ler_produto()
+            # for i in mostrar:
+            #    print(i, end='')
+
+
             vendedor_caixa = input('Nome do funcionário: ').upper()
-            comprador = input('CPF do comprador: ').upper()
-            quant =input('Quantidade vendida: ') 
-            data = input('Data da venda: ')
+
+            itens_vendidos = input('Nome do produto: ').upper()
+            comprador = input('CPF: ')
+            quant = input('Quantidade vendida: ')
+            quant = int(quant)
+            valor_passado = input('Valor total do comprador: ')
+            valor_passado = int(valor_passado) 
 
             VendasController.caixa_controller(itens_vendidos=itens_vendidos,
                                             vendedor=vendedor_caixa, comprador=comprador,
-                                            quantidade_vendida=quant, datatime=data)
+                                            quantidade_vendida=quant)
 
 
         elif decisao_user6 == 2:
