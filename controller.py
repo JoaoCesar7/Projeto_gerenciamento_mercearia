@@ -19,7 +19,7 @@ class CategoriaController:
                 existe = True
 
         if not existe:
-            CategoriaDao.salvarCategoria(novaCategoria)
+            CategoriaDao.salvarCategoria(novaCategoria)  
             print('Categoria cadastrada com sucesso!')
         else:
             print('A categoria já existe em nossa base de dados.')
@@ -71,7 +71,7 @@ class CategoriaController:
                 print('Categoria alterada com sucesso!')
 
 
-# CLASSES DA ÁREA DE PRODUTOS
+# CLASSES DA ÁREA DE PRODUTOS(ESTOQUE)
 
 class EstoqueController:
 
@@ -337,28 +337,51 @@ class Exemplo:
         else:
             print('Desculpe... tente novamente')
 
-# CAIXA
+# ÁREA DO CAIXA
 
 class VendasController:
 
     @classmethod
-    def caixa_controller(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, datatime):
+    def caixa_controller(cls, itens_vendidos, vendedor, comprador, quantidade_vendida):
         list_estoque = EstoqueDao.ler()
         list_funcionario = FuncionarioDao.ler()
-        list_cliente = ClienteDao.ler()
+        
 
-        estoque = list(filter(lambda est: est.nome == itens_vendidos, list_estoque)) 
-        funcionario = list(filter(lambda func: func.nome == vendedor, list_funcionario))
-        cliente = list(lambda client: client.cpf == comprador, list_cliente)
+        estoque = list(filter(lambda nome_produto: nome_produto.nome == itens_vendidos, list_estoque)) 
+        funcionario = list(filter(lambda nome_fucnionario: nome_fucnionario.nome == vendedor, list_funcionario))
 
-        if len(estoque) > 0:
-            if len(funcionario) > 0:
-                pass
+        valor_un = list(filter(lambda valor_unitario: valor_unitario.preco == comprador, list_estoque))
+        quant_ven = list(filter(lambda quantidade: quantidade.quantidade == quantidade_vendida,list_estoque ))
+
+        if len(funcionario) > 0:
+            if len(estoque) > 0:
+                for i in range(len(list_estoque)):
+                    if list_estoque[i].nome == itens_vendidos:  # Se o nome do produto é igual
+                        quantidade_produto = list_estoque[i].quantidade
+                        quantidade_produto = int(quantidade_produto)
+        
+                        if quantidade_produto >= quantidade_vendida:
+                            valor_produto = list_estoque[i].quantidade # O valor unitario de cada produto
+                            valor_produto = int(valor_produto)
+                            print(valor_produto)
+
+                            # multiplicação = valor_produto * quantidade_vendida
+
+                            # tenho que receber os dados da view, como dos itens vendidos,
+                            # cpf ou nome do comprador, quantidade vendida e data, em seguida
+                            # fazer as validações e verificações necessarias.
+        
+        
+                            # Desenvolvendo aplicação
+
+                        else:
+                            print('Quantidade excedida')
+
+            else:
+                print('Produto NÃO existe /ou não cadastrado em nossa base de dados')
+
+        else:
+            print('Funcionário NÃO existe em nossa base de dados')
 
 
     
-    # tenho que receber os dados da view, como dos itens vendidos,
-    # cpf ou nome do comprador, quantidade vendida e data, em seguida
-    # fazer as validações e verificações necessarias.
-        
-        
