@@ -249,9 +249,9 @@ while True:
 
 
             vendedor_caixa = input('Nome do funcionário: ').upper()
+            comprador = input('CPF do comprador: ')
 
             itens_vendidos = input('Nome do produto: ').upper()
-            comprador = input('CPF: ')
             quant = input('Quantidade vendida: ')
             quant = int(quant)
             valor_passado = input('Valor total do comprador: ')
@@ -259,7 +259,7 @@ while True:
 
             VendasController.caixa_controller(itens_vendidos=itens_vendidos,
                                             vendedor=vendedor_caixa, comprador=comprador,
-                                            quantidade_vendida=quant)
+                                            quantidade_vendida=quant, valor_total=valor_passado)
 
 
         elif decisao_user6 == 2:
