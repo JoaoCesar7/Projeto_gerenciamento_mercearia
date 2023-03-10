@@ -316,33 +316,12 @@ class FuncionarioController:
                     print('Funcionário alterado com sucesso')
 
 
-# CLASSES DA ÁREA DE ESTOQUE:
-
-class Exemplo:
-
-    @classmethod
-    def cadastrarEstoque(cls, produtos, quantidade):
-        x = EstoqueDao.ler()
-        y = CategoriaDao.ler_categoria()
-        z = list(filter(lambda x: x.nome == produtos, y))
-
-        est = list(filter(lambda x: x.nome == produtos, x))
-        if len(z) > 0:
-            if len(est) == 0:
-                produto = Produtos(produtos, quantidade)
-                EstoqueDao.salvar(produto)
-                print('Produto cadastrado com sucesso.')
-            else:
-                print('Produto já existe no estoque.')
-        else:
-            print('Desculpe... tente novamente')
-
 # ÁREA DO CAIXA
 
 class VendasController:
 
     @classmethod
-    def caixa_controller(cls, itens_vendidos, vendedor, comprador, quantidade_vendida):
+    def caixa_controller(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, valor_total):
         list_estoque = EstoqueDao.ler()
         list_funcionario = FuncionarioDao.ler()
         
@@ -351,28 +330,29 @@ class VendasController:
         funcionario = list(filter(lambda nome_fucnionario: nome_fucnionario.nome == vendedor, list_funcionario))
 
         valor_un = list(filter(lambda valor_unitario: valor_unitario.preco == comprador, list_estoque))
-        quant_ven = list(filter(lambda quantidade: quantidade.quantidade == quantidade_vendida,list_estoque ))
+        quant_ven = list(filter(lambda quantidade_vend: quantidade_vend.quantidade == quantidade_vendida,list_estoque ))
+
+        # averiguar variaveis valor_un e quant_ven
 
         if len(funcionario) > 0:
             if len(estoque) > 0:
                 for i in range(len(list_estoque)):
                     if list_estoque[i].nome == itens_vendidos:  # Se o nome do produto é igual
-                        quantidade_produto = list_estoque[i].quantidade
-                        quantidade_produto = int(quantidade_produto)
+                        estoque_quant_prod = list_estoque[i].quantidade
+                        estoque_quant_prod = int(estoque_quant_prod)
         
-                        if quantidade_produto >= quantidade_vendida:
-                            valor_produto = list_estoque[i].quantidade # O valor unitario de cada produto
-                            valor_produto = int(valor_produto)
-                            print(valor_produto)
+                        if estoque_quant_prod >= quantidade_vendida: 
+                            preco_uni = list_estoque[i].preco  # Preco do produto
+                            preco_uni = int(preco_uni)
+                            
+                            multiplicacao = preco_uni * quantidade_vendida
 
-                            # multiplicação = valor_produto * quantidade_vendida
-
-                            # tenho que receber os dados da view, como dos itens vendidos,
-                            # cpf ou nome do comprador, quantidade vendida e data, em seguida
-                            # fazer as validações e verificações necessarias.
-        
-        
-                            # Desenvolvendo aplicação
+                            if valor_total >= multiplicacao:
+                                total = valor_total - multiplicacao # subtração do valor do usuario com a conta final
+                                print('')
+                                print(f'repasse do usuário R${total}') 
+                            else:
+                                print('Saldo insuficiente')
 
                         else:
                             print('Quantidade excedida')
