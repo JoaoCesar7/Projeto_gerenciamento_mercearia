@@ -184,7 +184,7 @@ class Venda:
 
     @classmethod
     def ler(cls):
-        with open(DATA_BASE + 'estoque.txt', 'r') as arq:
+        with open(DATA_BASE + 'vendas.txt', 'r') as arq:
             cls.estoque = arq.readlines()
 
         forne = []
