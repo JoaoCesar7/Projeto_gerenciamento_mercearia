@@ -354,14 +354,7 @@ class VendasController:
 
                                 produ_vendidos = VendasDao.ler()
                                 
-                                lista = list(filter(lambda venda: venda.nome == itens_vendidos, produ_vendidos))
-                                if len(lista) > 0:
-                                    salvar1 = Vendas(itens_vendidos, preco_uni, quantidade_vendida)
-                                    VendasDao.salvar(salvar1)
-                                
-                                else:
-                                    salvar2 = Vendas(itens_vendidos, preco_uni, quantidade_vendida)
-                                    VendasDao.salvar(salvar2)
+                                lista = list(filter(lambda venda: venda.nome.replace('\n', '') == itens_vendidos, produ_vendidos))
 
                                 # Proximos passos para a leitura para armazenar e apagar produtos vendidos.
 
