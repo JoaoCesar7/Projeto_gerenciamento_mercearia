@@ -175,7 +175,7 @@ class FuncionarioDao:
 
 # CLASSES DE ESTOQUES:
 
-class Venda:
+class VendasDao:
     @classmethod
     def salvar(cls, vendas: Vendas):
         with open(DATA_BASE + 'vendas.txt', 'a') as arq:

@@ -1,7 +1,7 @@
 # Controller onde fica as validações do nosso algoritimo.
 
 from model import Categoria, Produtos, Vendas, Fornecedor, Cliente, Funcionario
-from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
+from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao, VendasDao
 
 DATA_BASE = 'data_base/'
 
@@ -351,6 +351,20 @@ class VendasController:
                                 total = valor_total - multiplicacao # subtração do valor do usuario com a conta final
                                 print('')
                                 print(f'repasse do usuário R${total}') 
+
+                                produ_vendidos = VendasDao.ler()
+                                
+                                lista = list(filter(lambda venda: venda.nome == itens_vendidos, produ_vendidos))
+                                if len(lista) > 0:
+                                    salvar1 = Vendas(itens_vendidos, preco_uni, quantidade_vendida)
+                                    VendasDao.salvar(salvar1)
+                                
+                                else:
+                                    salvar2 = Vendas(itens_vendidos, preco_uni, quantidade_vendida)
+                                    VendasDao.salvar(salvar2)
+
+                                # Proximos passos para a leitura para armazenar e apagar produtos vendidos.
+
                             else:
                                 print('Saldo insuficiente')
 
