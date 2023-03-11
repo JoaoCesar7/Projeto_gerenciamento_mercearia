@@ -1,6 +1,6 @@
 # modelagem dos dados
 
-from datetime import date
+from datetime import datetime
 
 
 class Categoria:
@@ -18,14 +18,21 @@ class Produtos:
         self.quantidade = quantidade
 
 
+class Estoque:
+
+    def __init__(self, produto: Produtos, quantidade):
+        self.produto = produto
+        self.quantidade = quantidade
+
+
 class Vendas:
 
-    def __init__(self, itens_vendidos: Produtos, vendedor, comprador, quantidade_vendida, datatime: date):
+    def __init__(self, itens_vendidos: Produtos, vendedor, comprador, quantidade_vendida, data = datetime.now().strftime("%d/%m/%Y")):
         self.itens_vendidos = itens_vendidos
         self.vendedor = vendedor
         self.comprador = comprador
         self.quantidade_vendida = quantidade_vendida
-        datatime = datatime.today()
+        self.data = data
 
 
 class Fornecedor:
