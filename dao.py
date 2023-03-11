@@ -77,7 +77,10 @@ class FornecedorDao:
     def salvar(cls, fornecedor: Fornecedor):
         with open(DATA_BASE + 'fornecedor.txt', 'a') as arq:
             arq.writelines(
-                fornecedor.nome + '|' + fornecedor.telefone + '|' + fornecedor.cnpj + '|' + fornecedor.categoria)
+                fornecedor.nome + '|' + 
+                fornecedor.telefone + '|' + 
+                fornecedor.cnpj + '|' + 
+                fornecedor.categoria)
             arq.writelines('\n')
 
     @classmethod
@@ -109,7 +112,11 @@ class ClienteDao:
     def salvar(cls, cliente: Cliente):
         with open(DATA_BASE + 'clientes.txt', 'a') as arq:
             arq.writelines(
-                cliente.nome + '|' + cliente.cpf + '|' + cliente.email + '|' + cliente.telefone + '|' + cliente.endereco)
+                cliente.nome + '|' + 
+                cliente.cpf + '|' + 
+                cliente.email + '|' + 
+                cliente.telefone + '|' + 
+                cliente.endereco)
             arq.writelines('\n')
 
     @classmethod
@@ -177,20 +184,27 @@ class FuncionarioDao:
 
 class VendasDao:
     @classmethod
-    def salvar(cls, vendas: Vendas):
+    def salvar(cls, venda: Vendas):
         with open(DATA_BASE + 'vendas.txt', 'a') as arq:
-            arq.writelines()
-            arq.writelines('\n')
+            arq.writelines(venda.itens_vendidos.nome + '|' + 
+                           venda.itens_vendidos.preco + '|' + 
+                           venda.itens_vendidos.categoria + '|' +
+                           venda.vendedor + '|' + venda.comprador + '|' + 
+                           str(venda.quantidade_vendida) + '|' + venda.data + '\n')
+            
 
     @classmethod
     def ler(cls):
         with open(DATA_BASE + 'vendas.txt', 'r') as arq:
-            cls.estoque = arq.readlines()
+            cls.venda = arq.readlines()
 
-        forne = []
+            cls.venda = list(map(lambda x: x.replace('\n'), cls.venda))
+            cls.venda = list(map(lambda x: x.split('|'), cls.venda))
 
-        if len(cls.estoque) > 0:
-            for i in cls.estoque:
-                forne.append(i[0], i[1], i[2], i[3])
+        lista_venda = []
 
-        return forne
+        if len(cls.venda) > 0:
+            for i in cls.venda:
+                lista_venda.append(Vendas(Produtos(i[0], i[1], i[2], i[3], i[4], i[5], i[6])))
+
+        return lista_venda
