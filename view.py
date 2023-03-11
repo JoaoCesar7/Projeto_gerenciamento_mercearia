@@ -227,6 +227,7 @@ while True:
             telefone_f = input('Número de telefone: ')
             endereco_f = input('Digite o nome do endereço com número: ').upper()
             clt_f = input('Carteira assinada: [S]im [N]ão: ').upper()
+            
 
             FuncionarioController.alterar_funcionario(nome_funcionario=nome_alterar, nome=nome_f, cpf=cpf_f,
                                                     email=email_f, telefone=telefone_f, endereco=endereco_f,
