@@ -14,7 +14,7 @@ class Produtos:
     def __init__(self, nome, preco, categoria):
         self.nome = nome
         self.preco = preco
-        self.categoria = categoria
+        self.categoria = categoria 
 
 
 class Estoque:
