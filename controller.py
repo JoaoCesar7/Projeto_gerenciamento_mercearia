@@ -84,8 +84,8 @@ class EstoqueController:
         h = list(filter(lambda x: x.nome.replace('\n', '') == nome, prod))
         if len(x) > 0:
             if len(h) == 0:
-                produto = Produtos(nome, preco, categoria, quantidade)
-                EstoqueDao.salvar(produto)
+                produto = Produtos(nome, preco, categoria)
+                EstoqueDao.salvar(produto, quantidade)
                 print('Produto Cadastrado com sucesso.')
             else:
                 print('Produto existe no nosso estoque.')
@@ -349,12 +349,11 @@ class VendasController:
 
                             if valor_total >= multiplicacao:
                                 total = valor_total - multiplicacao # subtração do valor do usuario com a conta final
+
+                                
                                 print('')
                                 print(f'repasse do usuário R${total}') 
 
-                                produ_vendidos = VendasDao.ler()
-                                
-                                lista = list(filter(lambda venda: venda.nome.replace('\n', '') == itens_vendidos, produ_vendidos))
 
                                 # Proximos passos para a leitura para armazenar e apagar produtos vendidos.
 
