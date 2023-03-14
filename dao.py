@@ -1,6 +1,6 @@
 # Dal fica responsavel pelo Armazenamento persistente
 
-from model import Categoria, Produtos, Vendas, Fornecedor, Cliente, Funcionario
+from model import Categoria, Estoque, Produtos, Vendas, Fornecedor, Cliente, Funcionario
 
 DATA_BASE = 'data_base/'
 
@@ -39,28 +39,29 @@ class CategoriaDao:
 class EstoqueDao:
 
     @classmethod
-    def salvar(cls, produtos: Produtos):  # Recebendo produtos da model
+    def salvar(cls, produtos: Produtos, quantidade):  # Recebendo produtos da model
         with open(DATA_BASE + 'estoque.txt', 'a') as arq:
             arq.writelines(
                 produtos.nome + '|' +
                 produtos.preco + '|' +
-                produtos.categoria + '|' +
-                produtos.quantidade + '\n'
+                produtos.categoria + '|' + 
+                str(quantidade)
             )
+            arq.writelines('\n')
 
     @classmethod
     def ler(cls):
         with open(DATA_BASE + 'estoque.txt', 'r') as arq:
             cls.estoque = arq.readlines()
 
-        produ = []
+        est = []
 
         if len(cls.estoque) > 0:
             for i in cls.estoque:
                 i = i.split('|')
-                produ.append(Produtos(i[0], i[1], i[2], i[3]))
+                est.append(Estoque(Produtos(i[0], i[1], i[2], i[3])))
 
-        return produ
+        return est
 
     @classmethod
     def ler_produto(cls):
@@ -190,7 +191,8 @@ class VendasDao:
                            venda.itens_vendidos.preco + '|' + 
                            venda.itens_vendidos.categoria + '|' +
                            venda.vendedor + '|' + venda.comprador + '|' + 
-                           str(venda.quantidade_vendida) + '|' + venda.data + '\n')
+                           str(venda.quantidade_vendida) + '|' + venda.data + '\n'
+                        )
             
 
     @classmethod
