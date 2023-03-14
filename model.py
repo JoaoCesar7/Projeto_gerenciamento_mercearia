@@ -11,11 +11,10 @@ class Categoria:
 
 class Produtos:
 
-    def __init__(self, nome, preco, categoria, quantidade):
+    def __init__(self, nome, preco, categoria):
         self.nome = nome
         self.preco = preco
         self.categoria = categoria
-        self.quantidade = quantidade
 
 
 class Estoque:
