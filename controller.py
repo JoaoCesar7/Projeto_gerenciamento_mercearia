@@ -1,6 +1,6 @@
 # Controller onde fica as validações do nosso algoritimo.
 
-from model import Categoria, Produtos, Vendas, Fornecedor, Cliente, Funcionario
+from model import Categoria, Estoque, Produtos, Vendas, Fornecedor, Cliente, Funcionario
 from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao, VendasDao
 
 DATA_BASE = 'data_base/'
@@ -84,8 +84,8 @@ class EstoqueController:
         h = list(filter(lambda x: x.nome.replace('\n', '') == nome, prod))
         if len(x) > 0:
             if len(h) == 0:
-                produto = Produtos(nome, preco, categoria)
-                EstoqueDao.salvar(produto, quantidade)
+                produto = Estoque(Produtos(nome, preco, categoria, quantidade))
+                EstoqueDao.salvar(produto)
                 print('Produto Cadastrado com sucesso.')
             else:
                 print('Produto existe no nosso estoque.')
@@ -132,7 +132,7 @@ class EstoqueController:
 
             for i in pro:
                 if not i.nome == nome:
-                    produtos = Produtos(nome, preco, categoria, quantidade)
+                    produtos = Produtos(nome, preco, categoria)
                     EstoqueDao.salvar(produtos)
                     print('Produto cadastrado com sucesso.')
 
