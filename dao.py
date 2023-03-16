@@ -57,7 +57,7 @@ class EstoqueDao:
         est = []
 
         if len(cls.estoques) > 0:
-            for i in cls.estoques:1
+            for i in cls.estoques:
                 i = i.split('|')
                 est.append(Estoque(Produtos(i[0], i[1], i[2], i[3])))
         return est
