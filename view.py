@@ -72,7 +72,8 @@ while True:
             nome = input('Nome do produto: ').upper()
             preco = input('Valor do produto: R$')
             categoria = input('Categoria do produto: ').upper()
-            quantidade = input('Quantidade do produto em estoque: ')
+            quantidade = input('Quantidade do produto para estoque: ')
+            
             EstoqueController.cadastrar_produto(nome=nome, preco=preco, categoria=categoria, quantidade=quantidade)
 
         elif decisao_user2 == 'a':
