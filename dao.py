@@ -39,12 +39,12 @@ class CategoriaDao:
 class EstoqueDao:
 
     @classmethod
-    def salvar(cls, estoques: Estoque, quantidade):  # Recebendo produtos da model
+    def salvar(cls, estoques: Produtos, quantidade):  # Recebendo produtos da model
         with open(DATA_BASE + 'estoque.txt', 'a') as arq:
             arq.writelines(
-                estoques.produto.nome + '|' +
-                estoques.produto.preco + '|' +
-                estoques.produto.categoria + '|' + 
+                estoques.nome + '|' +
+                estoques.preco + '|' +
+                estoques.categoria + '|' + 
                 str(quantidade)
             )
             arq.writelines('\n')
@@ -52,14 +52,15 @@ class EstoqueDao:
     @classmethod
     def ler(cls):
         with open(DATA_BASE + 'estoque.txt', 'r') as arq:
-            cls.estoques = arq.readlines()
+            cls.estoque = arq.readlines()
 
         est = []
 
-        if len(cls.estoques) > 0:
-            for i in cls.estoques:
+        if len(cls.estoque) > 0:
+            for i in cls.estoque:
                 i = i.split('|')
-                est.append(Estoque(Produtos(i[0], i[1], i[2], i[3])))
+                est.append(Estoque(Produtos(i[0], i[1], i[2]), i[3]))
+
         return est
 
     @classmethod
