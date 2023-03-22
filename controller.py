@@ -81,11 +81,12 @@ class EstoqueController:
         cat = CategoriaDao.ler_categoria()
         x = list(filter(lambda x: x.categoria.replace('\n', '') == categoria, cat))
 
-        h = list(filter(lambda x: x.nome.replace('\n', '') == nome, prod))
+        h = list(filter(lambda x: x.produto.nome.replace('\n', '') == nome, prod))
         if len(x) > 0:
             if len(h) == 0:
-                produto = Estoque(Produtos(nome, preco, categoria, quantidade))
-                EstoqueDao.salvar(produto)
+                print('')
+                produto = Produtos(nome, preco, categoria)
+                EstoqueDao.salvar(produto, quantidade)
                 print('Produto Cadastrado com sucesso.')
             else:
                 print('Produto existe no nosso estoque.')
@@ -96,12 +97,12 @@ class EstoqueController:
     def remover_produto(cls, nome_produto):
         x = EstoqueDao.ler()
 
-        produ = list(filter(lambda x: x.nome.replace('\n', '') == nome_produto, x))
+        produ = list(filter(lambda x: x.produto.nome.replace('\n', '') == nome_produto, x))
         if len(produ) == 0:
             print('Não existe esse produto em nossa base de dados.')
         else:
             for i in range(len(x)):
-                if x[i].nome.replace('\n', '') == nome_produto:
+                if x[i].produto.nome.replace('\n', '') == nome_produto:
                     del x[i]
                     break
 
@@ -109,7 +110,7 @@ class EstoqueController:
 
             with open(DATA_BASE + 'estoque.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria + '|' + i.quantidade)
+                    arq.writelines(i.produto.nome + '|' + i.produto.preco + '|' + i.produto.categoria + '|' + i.quantidade)
 
     @classmethod
     def alterar_produto(cls, alterar_produto, nome, preco, categoria, quantidade):
