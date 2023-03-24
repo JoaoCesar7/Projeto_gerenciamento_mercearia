@@ -110,18 +110,21 @@ class EstoqueController:
 
             with open(DATA_BASE + 'estoque.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.produto.nome + '|' + i.produto.preco + '|' + i.produto.categoria + '|' + i.quantidade)
+                    arq.writelines(i.produto.nome + '|' + 
+                                   i.produto.preco + '|' + 
+                                   i.produto.categoria + '|' + 
+                                   i.quantidade)
 
     @classmethod
     def alterar_produto(cls, alterar_produto, nome, preco, categoria, quantidade):
         x = EstoqueDao.ler()
 
-        pro = list(filter(lambda x: x.nome.replace('\n', '') == alterar_produto, x))
+        pro = list(filter(lambda x: x.produto.nome.replace('\n', '') == alterar_produto, x))
         if len(pro) == 0:
             print('Produto NÃO existe em nossa base de dados.')
         else:
             for i in range(len(x)):
-                if x[i].nome.replace('\n', '') == alterar_produto:
+                if x[i].produto.nome.replace('\n', '') == alterar_produto:
                     del x[i]
                     break
 
@@ -129,12 +132,16 @@ class EstoqueController:
 
             with open(DATA_BASE + 'estoque.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome + '|' + i.preco + '|' + i.categoria + '|' + quantidade)
+                    arq.writelines(i.produto.nome + '|' + 
+                                    i.produto.preco + '|' + 
+                                    i.produto.categoria + '|' + 
+                                    quantidade)
+                    arq.writelines('\n')
 
             for i in pro:
-                if not i.nome == nome:
+                if not i.produto.nome == nome:
                     produtos = Produtos(nome, preco, categoria)
-                    EstoqueDao.salvar(produtos)
+                    EstoqueDao.salvar(produtos, quantidade)
                     print('Produto cadastrado com sucesso.')
 
 
@@ -327,10 +334,10 @@ class VendasController:
         list_funcionario = FuncionarioDao.ler()
         
 
-        estoque = list(filter(lambda nome_produto: nome_produto.nome == itens_vendidos, list_estoque)) 
+        estoque = list(filter(lambda nome_produto: nome_produto.produto.nome == itens_vendidos, list_estoque)) 
         funcionario = list(filter(lambda nome_fucnionario: nome_fucnionario.nome == vendedor, list_funcionario))
 
-        valor_un = list(filter(lambda valor_unitario: valor_unitario.preco == comprador, list_estoque))
+        valor_un = list(filter(lambda valor_unitario: valor_unitario.produto.preco == comprador, list_estoque))
         quant_ven = list(filter(lambda quantidade_vend: quantidade_vend.quantidade == quantidade_vendida,list_estoque ))
 
         # averiguar variaveis valor_un e quant_ven
@@ -338,12 +345,12 @@ class VendasController:
         if len(funcionario) > 0:
             if len(estoque) > 0:
                 for i in range(len(list_estoque)):
-                    if list_estoque[i].nome == itens_vendidos:  # Se o nome do produto é igual
+                    if list_estoque[i].produto.nome == itens_vendidos:  # Se o nome do produto é igual
                         estoque_quant_prod = list_estoque[i].quantidade
                         estoque_quant_prod = int(estoque_quant_prod)
         
                         if estoque_quant_prod >= quantidade_vendida: 
-                            preco_uni = list_estoque[i].preco  # Preco do produto
+                            preco_uni = list_estoque[i].produto.preco  # Preco do produto
                             preco_uni = int(preco_uni)
                             
                             multiplicacao = preco_uni * quantidade_vendida
