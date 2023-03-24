@@ -190,8 +190,9 @@ class VendasDao:
                            venda.itens_vendidos.preco + '|' + 
                            venda.itens_vendidos.categoria + '|' +
                            venda.vendedor + '|' + venda.comprador + '|' + 
-                           str(venda.quantidade_vendida) + '|' + venda.data + '\n'
+                           str(venda.quantidade_vendida) + '|' + venda.data
                         )
+            arq.writelines('\n')
             
 
     @classmethod
