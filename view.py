@@ -70,7 +70,7 @@ while True:
         if decisao_user2 == 'c':
 
             nome = input('Nome do produto: ').upper()
-            preco = input('Valor do produto: R$')
+            preco = input('Valor do produto: R$ ')
             categoria = input('Categoria do produto: ').upper()
             quantidade = input('Quantidade do produto para estoque: ')
             
