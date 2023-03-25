@@ -8,7 +8,12 @@ from controller import (
     FuncionarioController,
     VendasController
 )
-from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao
+from dao import (CategoriaDao, 
+    EstoqueDao, 
+    FornecedorDao, 
+    ClienteDao, 
+    FuncionarioDao
+)
 
 
 print('======================= Gerenciamento de Mercearia =======================')
@@ -16,7 +21,10 @@ print()
 print()
 
 while True:
-    decisao = input('[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [6]Caixa [0]Fechar: ')
+    decisao = input('[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [6]Caixa [7]Relatórios [0]Fechar: ')
+
+    # Pensar em uma forma de tirar a excessão de str. para que o laço de repetição seja executado caso não for digitado um inteiro.
+    
     decisao = int(decisao)
 
     print('')
@@ -251,7 +259,6 @@ while True:
 
 
             vendedor_caixa = input('Nome do funcionário: ').upper()
-            comprador = input('CPF do comprador: ')
 
             itens_vendidos = input('Nome do produto: ').upper()
             quant = input('Quantidade vendida: ')
@@ -260,17 +267,27 @@ while True:
             valor_passado = int(valor_passado) 
 
             VendasController.caixa_controller(itens_vendidos=itens_vendidos,
-                                            vendedor=vendedor_caixa, comprador=comprador,
-                                            quantidade_vendida=quant, valor_total=valor_passado)
+                                            vendedor=vendedor_caixa,
+                                            quantidade_vendida=quant, 
+                                            valor_total=valor_passado
+            )
 
 
         elif decisao_user6 == 2:
-            pass
-
+            continue
 
         else:
             print('Desculpe... Não consegui concluir sua solicitação')
             continue
+
+    elif decisao == 7:
+        
+        decisoes = input('[R]elatório total de vendas []').upper()
+
+        if decisoes == 'R':
+            pass
+
+
 
     else:
         pass
