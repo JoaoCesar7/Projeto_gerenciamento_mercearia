@@ -2,6 +2,7 @@
 
 from model import Categoria, Estoque, Produtos, Vendas, Fornecedor, Cliente, Funcionario
 from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao, VendasDao
+from datetime import datetime, date
 
 DATA_BASE = 'data_base/'
 
@@ -254,7 +255,12 @@ class ClienteController:
 
             with open(DATA_BASE + 'clientes.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco)
+                    arq.writelines(i.nome + '|' + 
+                                   i.cpf + '|' + 
+                                   i.email + '|' + 
+                                   i.telefone + '|' + 
+                                   i.endereco
+                    )
 
             for i in lista_client:
                 if not i.nome == nome:
@@ -297,7 +303,13 @@ class FuncionarioController:
             with open(DATA_BASE + 'funcionario.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(
-                        i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
+                        i.nome + '|' + 
+                        i.cpf + '|' + 
+                        i.email + '|' + 
+                        i.telefone + '|' + 
+                        i.endereco + '|' + 
+                        i.clt
+                    )
 
     @classmethod
     def alterar_funcionario(cls, nome_funcionario, nome, cpf, email, telefone, endereco, clt):
@@ -314,8 +326,13 @@ class FuncionarioController:
 
             with open(DATA_BASE + 'funcionario.txt', 'w') as arq:
                 for i in x:
-                    arq.writelines(
-                        i.nome + '|' + i.cpf + '|' + i.email + '|' + i.telefone + '|' + i.endereco + '|' + i.clt)
+                    arq.writelines(i.nome + '|' + 
+                                   i.cpf + '|' + 
+                                   i.email + '|' + 
+                                   i.telefone + '|' + 
+                                   i.endereco + '|' + 
+                                   i.clt
+                    )
 
             for i in lista:
                 if not i.nome == nome:
@@ -329,16 +346,12 @@ class FuncionarioController:
 class VendasController:
 
     @classmethod
-    def caixa_controller(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, valor_total):
+    def caixa_controller(cls, itens_vendidos, vendedor, quantidade_vendida, valor_total):
         list_estoque = EstoqueDao.ler()
         list_funcionario = FuncionarioDao.ler()
-        
 
         estoque = list(filter(lambda nome_produto: nome_produto.produto.nome == itens_vendidos, list_estoque)) 
         funcionario = list(filter(lambda nome_fucnionario: nome_fucnionario.nome == vendedor, list_funcionario))
-
-        valor_un = list(filter(lambda valor_unitario: valor_unitario.produto.preco == comprador, list_estoque))
-        quant_ven = list(filter(lambda quantidade_vend: quantidade_vend.quantidade == quantidade_vendida,list_estoque ))
 
         # averiguar variaveis valor_un e quant_ven
 
@@ -357,11 +370,19 @@ class VendasController:
 
                             if valor_total >= multiplicacao:
                                 total = valor_total - multiplicacao # subtração do valor do usuario com a conta final
-
                                 
                                 print('')
                                 print(f'repasse do usuário R${total}') 
 
+                                print(f'Horario da venda {datetime.now().strftime("%d/%m/%Y")}')
+
+                                with open(DATA_BASE + 'vendido.txt', 'w') as arq:
+                                    for i in list_estoque:
+                                        arq.writelines(i.produto.nome + '|' +
+                                                       i.produto.categoria + '|' +
+                                                       i.quantidade + '|' +
+                                                       i.data
+                                        )
 
                                 # Proximos passos para a leitura para armazenar e apagar produtos vendidos.
 
@@ -377,5 +398,3 @@ class VendasController:
         else:
             print('Funcionário NÃO existe em nossa base de dados')
 
-
-    
