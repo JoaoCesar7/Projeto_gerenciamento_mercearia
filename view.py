@@ -257,7 +257,7 @@ while True:
             # for i in mostrar:
             #    print(i, end='')
 
-
+            cpf_usr = input('CPF do usuário: ')
             vendedor_caixa = input('Nome do funcionário: ').upper()
 
             itens_vendidos = input('Nome do produto: ').upper()
@@ -266,7 +266,8 @@ while True:
             valor_passado = input('Valor total do comprador: ')
             valor_passado = int(valor_passado) 
 
-            VendasController.caixa_controller(itens_vendidos=itens_vendidos,
+            VendasController.caixa_controller(comprador=cpf_usr,
+                                            itens_vendidos=itens_vendidos,
                                             vendedor=vendedor_caixa,
                                             quantidade_vendida=quant, 
                                             valor_total=valor_passado
