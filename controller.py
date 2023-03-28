@@ -346,7 +346,7 @@ class FuncionarioController:
 class VendasController:
 
     @classmethod
-    def caixa_controller(cls, itens_vendidos, vendedor, quantidade_vendida, valor_total):
+    def caixa_controller(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, valor_total):
         list_estoque = EstoqueDao.ler()
         list_funcionario = FuncionarioDao.ler()
 
@@ -376,15 +376,18 @@ class VendasController:
 
                                 print(f'Horario da venda {datetime.now().strftime("%d/%m/%Y")}')
 
-                                with open(DATA_BASE + 'vendido.txt', 'w') as arq:
-                                    for i in list_estoque:
-                                        arq.writelines(i.produto.nome + '|' +
-                                                       i.produto.categoria + '|' +
-                                                       i.quantidade + '|' +
-                                                       i.data
-                                        )
+                                #Leitura para armazenar dados obtidos.
+                                salvar = Vendas(Produtos(list_estoque[i].produto.nome, 
+                                                        list_estoque[i].produto.preco, 
+                                                        list_estoque[i].produto.categoria), 
+                                                        vendedor, 
+                                                        comprador, 
+                                                        quantidade_vendida
+                                )
+                                VendasDao.salvar(salvar)
 
-                                # Proximos passos para a leitura para armazenar e apagar produtos vendidos.
+                                print(f'R${total} Recebido com sucesso')
+  
 
                             else:
                                 print('Saldo insuficiente')
