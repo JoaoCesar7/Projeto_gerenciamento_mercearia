@@ -181,17 +181,19 @@ class FuncionarioDao:
         return lista_funcionario
 
 
-# CLASSES DE ESTOQUES:
+# CLASSES DO CAIXA:
 
 class VendasDao:
     @classmethod
     def salvar(cls, venda: Vendas):
         with open(DATA_BASE + 'vendas.txt', 'a') as arq:
-            arq.writelines(venda.itens_vendidos.nome + '|' + 
+            arq.writelines(venda.vendedor + '|' + 
+                           venda.comprador + '|' + 
+                           venda.itens_vendidos.nome + '|' + 
                            venda.itens_vendidos.preco + '|' + 
                            venda.itens_vendidos.categoria + '|' +
-                           venda.vendedor + '|' + venda.comprador + '|' + 
-                           str(venda.quantidade_vendida) + '|' + venda.data
+                           str(venda.quantidade_vendida) + '|' + 
+                           venda.data
                         )
             arq.writelines('\n')
             
@@ -208,7 +210,7 @@ class VendasDao:
 
         if len(cls.venda) > 0:
             for i in cls.venda:
-                lista_venda.append(Vendas(Produtos(i[0], i[1], i[2]), i[3], i[4], i[5], i[6]))
+                lista_venda.append(Vendas(Produtos(i[0], i[1], i[2], i[3]), i[4], i[5]))
 
         return lista_venda
 
@@ -240,6 +242,6 @@ class TotalVendas:
 
         if len(cls.vendido) > 0:
             for i in cls.vendido:
-                venda_temp.append(Estoque(Produtos(i[0]), i[1], i[2], i[3]))
+                venda_temp.append(Produtos(i[0], i[1], i[2], i[3]))
 
         return venda_temp
