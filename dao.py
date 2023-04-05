@@ -214,34 +214,3 @@ class VendasDao:
 
         return lista_venda
 
-
-# SALVAR VENDAS FEITAS
-
-class TotalVendas:
-
-    @classmethod
-    def salvar_vendas(cls, vendido: Vendas ):
-        with open(DATA_BASE + 'vendido.txt', 'a') as arq:
-            arq.writelines(vendido.itens_vendidos.nome + '|' +
-                           vendido.itens_vendidos.categoria + '|'+
-                           vendido.comprador + '|' +
-                           vendido.data
-                           )
-            arq.writelines('\n')
-
-
-    @classmethod
-    def ler_vendas(cls):
-        with open(DATA_BASE + 'vendido.txt', 'r') as arq:
-            cls.vendido = arq.readlines()
-
-            cls.vendido = list(map(lambda x: x.replace('\n', ''), cls.vendido))
-            cls.vendido = list(map(lambda x: x.split('|'), cls.vendido))
-
-        venda_temp = []
-
-        if len(cls.vendido) > 0:
-            for i in cls.vendido:
-                venda_temp.append(Produtos(i[0], i[1], i[2], i[3]))
-
-        return venda_temp
