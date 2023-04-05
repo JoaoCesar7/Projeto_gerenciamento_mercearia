@@ -374,7 +374,7 @@ class VendasController:
                                 print('')
                                 print(f'repasse do usuário R${total}') 
 
-                                print(f'Horario da venda {datetime.now().strftime("%d/%m/%Y")}')
+                                print(f'Data da venda {datetime.now().strftime("%d/%m/%Y")}')
 
                                 #Leitura para armazenar dados obtidos.
                                 salvar = Vendas(Produtos(list_estoque[i].produto.nome, 
@@ -385,8 +385,43 @@ class VendasController:
                                                         quantidade_vendida
                                 )
                                 VendasDao.salvar(salvar)
+                                    
+                                quant_final = estoque_quant_prod - quantidade_vendida
+                                quant_final = str(quant_final)
+                                
 
-                                print(f'R${total} Recebido com sucesso')
+
+                                with open(DATA_BASE + 'estoque.txt', 'r') as arq:
+                                    cls.venda = arq.readlines()
+
+                                    cls.venda = list(map(lambda x: x.split('|'), cls.venda))
+    
+                                    with open(DATA_BASE + 'estoque.txt', 'w') as arq:
+                                        
+                                        # preciso fazer um meio de trocar a quantidade que há em estoque
+                                        # para a quantidade nova diminuida pela quantidade vendida para o usuário
+
+
+                                        for i in list_estoque:
+                                            arq.writelines(i.produto.nome + '|' + 
+                                                        i.produto.preco +'|'+
+                                                        i.produto.categoria + '|' +
+                                                        quant_final
+                                            )
+                                            arq.writelines('\n')
+                                
+
+
+
+
+                                # Remover a quantidade do arquivo estoque.txt e alterar a quantidade
+                                # Para a nova quantidade após a venda.
+                                #DESENVOLVIMENTO...
+
+
+
+
+                                print(f'Transação efetuada com sucesso')
   
 
                             else:
