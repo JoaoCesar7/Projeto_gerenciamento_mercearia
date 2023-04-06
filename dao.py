@@ -214,3 +214,11 @@ class VendasDao:
 
         return lista_venda
 
+# Classe de tratamentos
+
+class TratamentosDao:
+
+    @classmethod
+    def salvar(cls):
+        with open('tratamentos.txt', 'a') as arq:
+            pass
