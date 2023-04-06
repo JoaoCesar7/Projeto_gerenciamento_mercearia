@@ -1,10 +1,23 @@
 # Controller onde fica as validações do nosso algoritimo.
 
-from model import Categoria, Estoque, Produtos, Vendas, Fornecedor, Cliente, Funcionario
-from dao import CategoriaDao, EstoqueDao, FornecedorDao, ClienteDao, FuncionarioDao, VendasDao
+from model import (Produtos, 
+                   Vendas, 
+                   Fornecedor, 
+                   Cliente, 
+                   Funcionario
+)
+from dao import (CategoriaDao, 
+                EstoqueDao, 
+                FornecedorDao, 
+                ClienteDao, 
+                FuncionarioDao, 
+                VendasDao, 
+                TratamentosDao
+)
 from datetime import datetime, date
 
 DATA_BASE = 'data_base/'
+
 
 # CLASSES DA ÁREA DE CATEGORIA
 
@@ -388,41 +401,25 @@ class VendasController:
                                     
                                 quant_final = estoque_quant_prod - quantidade_vendida
                                 quant_final = str(quant_final)
-                                
 
+                                with open(DATA_BASE + 'estoque.txt', 'w') as arq:
 
-                                with open(DATA_BASE + 'estoque.txt', 'r') as arq:
-                                    cls.venda = arq.readlines()
+                                    for i in list_estoque:
 
-                                    cls.venda = list(map(lambda x: x.split('|'), cls.venda))
-    
-                                    with open(DATA_BASE + 'estoque.txt', 'w') as arq:
-                                        
-                                        # preciso fazer um meio de trocar a quantidade que há em estoque
-                                        # para a quantidade nova diminuida pela quantidade vendida para o usuário
-
-
-                                        for i in list_estoque:
-                                            arq.writelines(i.produto.nome + '|' + 
-                                                        i.produto.preco +'|'+
-                                                        i.produto.categoria + '|' +
-                                                        quant_final
-                                            )
-                                            arq.writelines('\n')
-                                
-
-
-
+                                        arq.writelines(i.produto.nome + '|' + 
+                                                    i.produto.preco +'|'+
+                                                    i.produto.categoria + '|' +
+                                                    quant_final
+                                        )
+                                        arq.writelines('\n')
+                                    
 
                                 # Remover a quantidade do arquivo estoque.txt e alterar a quantidade
                                 # Para a nova quantidade após a venda.
                                 #DESENVOLVIMENTO...
 
-
-
-
                                 print(f'Transação efetuada com sucesso')
-  
+
 
                             else:
                                 print('Saldo insuficiente')
@@ -430,9 +427,10 @@ class VendasController:
                         else:
                             print('Quantidade excedida')
 
-            else:
-                print('Produto NÃO existe /ou não cadastrado em nossa base de dados')
-
+                else:
+                    print('Produto NÃO existe /ou não cadastrado em nossa base de dados')
+        
         else:
             print('Funcionário NÃO existe em nossa base de dados')
 
+        
