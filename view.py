@@ -266,11 +266,12 @@ while True:
             valor_passado = input('Valor total do comprador: ')
             valor_passado = int(valor_passado) 
 
-            VendasController.caixa_controller(comprador=cpf_usr,
-                                            itens_vendidos=itens_vendidos,
-                                            vendedor=vendedor_caixa,
-                                            quantidade_vendida=quant, 
-                                            valor_total=valor_passado
+            VendasController.caixa_controller(
+                            comprador=cpf_usr,
+                            itens_vendidos=itens_vendidos,
+                            vendedor=vendedor_caixa,
+                            quantidade_vendida=quant, 
+                            valor_total=valor_passado
             )
 
 
