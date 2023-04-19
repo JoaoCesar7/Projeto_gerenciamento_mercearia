@@ -1,6 +1,14 @@
 # Dal fica responsavel pelo Armazenamento persistente
 
-from model import Categoria, Estoque, Produtos, Vendas, Fornecedor, Cliente, Funcionario
+from model import(
+        Categoria, 
+        Estoque, 
+        Produtos, 
+        Vendas, 
+        Fornecedor, 
+        Cliente, 
+        Funcionario
+)
 from datetime import datetime 
 
 DATA_BASE = 'data_base/'
