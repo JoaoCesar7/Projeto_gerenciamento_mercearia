@@ -364,6 +364,7 @@ class VendasController:
     def caixa_controller(cls, itens_vendidos, vendedor, comprador, quantidade_vendida, valor_total):
         list_estoque = EstoqueDao.ler()
         list_funcionario = FuncionarioDao.ler()
+        list_categoria = CategoriaDao.ler_categoria()
 
         estoque = list(filter(lambda nome_produto: nome_produto.produto.nome == itens_vendidos, list_estoque)) 
         funcionario = list(filter(lambda nome_fucnionario: nome_fucnionario.nome == vendedor, list_funcionario))
@@ -375,12 +376,10 @@ class VendasController:
                 for i in range(len(list_estoque)):
                     if list_estoque[i].produto.nome == itens_vendidos:  # Se o nome do produto é igual
 
-                        estoque_quant_prod = list_estoque[i].quantidade
-                        estoque_quant_prod = int(estoque_quant_prod)
+                        estoque_quant_prod = int(list_estoque[i].quantidade)
         
                         if estoque_quant_prod >= quantidade_vendida: 
-                            preco_uni = list_estoque[i].produto.preco  # Preco do produto
-                            preco_uni = int(preco_uni)
+                            preco_uni = int(list_estoque[i].produto.preco)  # Preco do produto
                             
                             multiplicacao = preco_uni * quantidade_vendida
 
@@ -402,33 +401,23 @@ class VendasController:
                                 )
                                 VendasDao.salvar(salvar)
                                     
-                                quant_final = estoque_quant_prod - quantidade_vendida
-                                quant_final = str(quant_final)
+                                quant_final = str(estoque_quant_prod - quantidade_vendida)
+                                print(quant_final)
+               
+                                estoque_temp = []  # salvando a nova quantidade de produto
 
-                                tmp = []
-
-                                tmp.append(list_estoque[i])
-
-    
+                                estoque_temp.append(list_estoque[i].produto.nome + '|' +
+                                                    list_estoque[i].produto.preco + '|' +
+                                                    list_estoque[i].produto.categoria + '|' +
+                                                    quant_final)
                                 
-                                
-                                # resolver como alterar arquivos em lista e depois salvar                                
-
-            
-
-                                '''
-                                with open(DATA_BASE + 'estoque.txt', 'w') as arq:
-                                    arq.write(tmp + '\n')
-                                '''
-            
-                                print(f'Transação efetuada com sucesso')
-                                
-                            
-                            
                                 # DESENVOLVIMENTO...
+                                # TODO: Colocar alteração do produto no estoque
+
+                                print(estoque_temp)
+
+                                print(f'Transação efetuada com sucesso')
                                     
-
-
                             else:
                                 print('Saldo insuficiente')
 
