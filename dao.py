@@ -1,23 +1,23 @@
 # Dal fica responsavel pelo Armazenamento persistente
 
-from model import(
-        Categoria, 
-        Estoque, 
-        Produtos, 
-        Vendas, 
-        Fornecedor, 
-        Cliente, 
-        Funcionario
+from model import (
+    Categoria,
+    Estoque,
+    Produtos,
+    Vendas,
+    Fornecedor,
+    Cliente,
+    Funcionario,
 )
-from datetime import datetime 
+from datetime import datetime
 
 DATA_BASE = 'data_base/'
 
 
 # CLASSES DA ÁREA DE CATEGORIA:
 
-class CategoriaDao:
 
+class CategoriaDao:
     @classmethod
     def salvarCategoria(cls, categoria: Categoria):  # Salvar Categoria.
         with open(DATA_BASE + 'categoria.txt', 'a') as arq:
@@ -45,16 +45,21 @@ class CategoriaDao:
 
 # CLASSES DA ÁREA DE PRODUTOS:
 
-class EstoqueDao:
 
+class EstoqueDao:
     @classmethod
-    def salvar(cls, estoques: Produtos, quantidade):  # Recebendo produtos da model
+    def salvar(
+        cls, estoques: Produtos, quantidade
+    ):  # Recebendo produtos da model
         with open(DATA_BASE + 'estoque.txt', 'a') as arq:
             arq.writelines(
-                estoques.nome + '|' +
-                estoques.preco + '|' +
-                estoques.categoria + '|' + 
-                str(quantidade)
+                estoques.nome
+                + '|'
+                + estoques.preco
+                + '|'
+                + estoques.categoria
+                + '|'
+                + str(quantidade)
             )
             arq.writelines('\n')
 
@@ -81,16 +86,20 @@ class EstoqueDao:
 
 # CLASSES DE FORNECEDOR:
 
-class FornecedorDao:
 
+class FornecedorDao:
     @classmethod
     def salvar(cls, fornecedor: Fornecedor):
         with open(DATA_BASE + 'fornecedor.txt', 'a') as arq:
             arq.writelines(
-                fornecedor.nome + '|' + 
-                fornecedor.telefone + '|' + 
-                fornecedor.cnpj + '|' + 
-                fornecedor.categoria)
+                fornecedor.nome
+                + '|'
+                + fornecedor.telefone
+                + '|'
+                + fornecedor.cnpj
+                + '|'
+                + fornecedor.categoria
+            )
             arq.writelines('\n')
 
     @classmethod
@@ -116,17 +125,22 @@ class FornecedorDao:
 
 # CLASSES DE CLIENTES
 
-class ClienteDao:
 
+class ClienteDao:
     @classmethod
     def salvar(cls, cliente: Cliente):
         with open(DATA_BASE + 'clientes.txt', 'a') as arq:
             arq.writelines(
-                cliente.nome + '|' + 
-                cliente.cpf + '|' + 
-                cliente.email + '|' + 
-                cliente.telefone + '|' + 
-                cliente.endereco)
+                cliente.nome
+                + '|'
+                + cliente.cpf
+                + '|'
+                + cliente.email
+                + '|'
+                + cliente.telefone
+                + '|'
+                + cliente.endereco
+            )
             arq.writelines('\n')
 
     @classmethod
@@ -152,18 +166,24 @@ class ClienteDao:
 
 # CLASSE DE FUNCIONARIO
 
-class FuncionarioDao:
 
+class FuncionarioDao:
     @classmethod
     def salvar(cls, funcionario: Funcionario):
         with open(DATA_BASE + 'funcionario.txt', 'a') as arq:
             arq.writelines(
-                funcionario.nome + '|' +
-                funcionario.cpf + '|' +
-                funcionario.email + '|' +
-                funcionario.telefone + '|' +
-                funcionario.endereco + '|' +
-                funcionario.clt + '\n'
+                funcionario.nome
+                + '|'
+                + funcionario.cpf
+                + '|'
+                + funcionario.email
+                + '|'
+                + funcionario.telefone
+                + '|'
+                + funcionario.endereco
+                + '|'
+                + funcionario.clt
+                + '\n'
             )
 
     @classmethod
@@ -179,11 +199,9 @@ class FuncionarioDao:
                 func.append(Funcionario(i[0], i[1], i[2], i[3], i[4], i[5]))
 
         return func
-    
-    @classmethod
 
+    @classmethod
     def lista_funcionario(cls):
-        
         funcionario = open(DATA_BASE + 'funcionario.txt', 'r')
         lista_funcionario = funcionario.readlines()
         return lista_funcionario
@@ -191,20 +209,27 @@ class FuncionarioDao:
 
 # CLASSES DO CAIXA:
 
+
 class VendasDao:
     @classmethod
     def salvar(cls, venda: Vendas):
         with open(DATA_BASE + 'vendas.txt', 'a') as arq:
-            arq.writelines(venda.vendedor + '|' + 
-                           venda.comprador + '|' + 
-                           venda.itens_vendidos.nome + '|' + 
-                           venda.itens_vendidos.preco + '|' + 
-                           venda.itens_vendidos.categoria + '|' +
-                           str(venda.quantidade_vendida) + '|' + 
-                           venda.data
-                        )
+            arq.writelines(
+                venda.vendedor
+                + '|'
+                + venda.comprador
+                + '|'
+                + venda.itens_vendidos.nome
+                + '|'
+                + venda.itens_vendidos.preco
+                + '|'
+                + venda.itens_vendidos.categoria
+                + '|'
+                + str(venda.quantidade_vendida)
+                + '|'
+                + venda.data
+            )
             arq.writelines('\n')
-            
 
     @classmethod
     def ler(cls):
@@ -218,14 +243,17 @@ class VendasDao:
 
         if len(cls.venda) > 0:
             for i in cls.venda:
-                lista_venda.append(Vendas(Produtos(i[0], i[1], i[2], i[3]), i[4], i[5]))
+                lista_venda.append(
+                    Vendas(Produtos(i[0], i[1], i[2], i[3]), i[4], i[5])
+                )
 
         return lista_venda
 
+
 # Classe de tratamentos
 
-class TratamentosDao:
 
+class TratamentosDao:
     @classmethod
     def salvar(cls):
         with open('tratamentos.txt', 'a') as arq:
