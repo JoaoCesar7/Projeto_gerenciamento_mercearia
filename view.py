@@ -6,25 +6,30 @@ from controller import (
     FornecedorController,
     ClienteController,
     FuncionarioController,
-    VendasController
+    VendasController,
 )
-from dao import (CategoriaDao, 
-    EstoqueDao, 
-    FornecedorDao, 
-    ClienteDao, 
-    FuncionarioDao
+from dao import (
+    CategoriaDao,
+    EstoqueDao,
+    FornecedorDao,
+    ClienteDao,
+    FuncionarioDao,
 )
 
 
-print('======================= Gerenciamento de Mercearia =======================')
+print(
+    '======================= Gerenciamento de Mercearia ======================='
+)
 print()
 print()
 
 while True:
-    decisao = input('[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [6]Caixa [7]Relatórios [0]Fechar: ')
+    decisao = input(
+        '[1]Categoria [2]Produto [3]Fornecedor [4]Cliente [5]Funcionário [6]Caixa [7]Relatórios [0]Fechar: '
+    )
 
     # Pensar em uma forma de tirar a excessão de str. para que o laço de repetição seja executado caso não for digitado um inteiro.
-    
+
     decisao = int(decisao)
 
     print('')
@@ -34,27 +39,39 @@ while True:
     # Área de Cadastro/Alteração/Remoção
 
     if decisao == 1:
-        decisao_user = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
+        decisao_user = input(
+            '[C]adastrar [A]lterar [R]emover [V]oltar: '
+        ).lower()
 
         mostrar = CategoriaDao.lercategoria()
         for i in mostrar:
             print(i, end='')  # Mostrar lista de categoria pro usuário
-    
+
         if decisao_user == 'c':
 
             nome_categoria = input('Nome da categoria: ').upper()
-            CategoriaController.cadastrarCategoria(nome_categoria)  # Chamando controller      
+            CategoriaController.cadastrarCategoria(
+                nome_categoria
+            )  # Chamando controller
 
         elif decisao_user == 'a':
 
-            alterar_categoria = input('Digite o nome da categoria que deseja alterar: ').upper()
-            alterada_categoria = input('Digite o nome da nova categoria alterada: ').upper()
-            CategoriaController.alterarCategoria(alterarCategoria=alterar_categoria,
-                                                 alteradaCategoria=alterada_categoria)
+            alterar_categoria = input(
+                'Digite o nome da categoria que deseja alterar: '
+            ).upper()
+            alterada_categoria = input(
+                'Digite o nome da nova categoria alterada: '
+            ).upper()
+            CategoriaController.alterarCategoria(
+                alterarCategoria=alterar_categoria,
+                alteradaCategoria=alterada_categoria,
+            )
 
         elif decisao_user == 'r':
 
-            indice_categoria = input('Digite o nome da categoria que dejesa remover: ').upper()
+            indice_categoria = input(
+                'Digite o nome da categoria que dejesa remover: '
+            ).upper()
             CategoriaController.removerCategoria(indice_categoria)
 
         elif decisao_user == 'v':
@@ -70,7 +87,9 @@ while True:
     # ÁREA DE PRODUTOS
 
     elif decisao == 2:
-        decisao_user2 = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
+        decisao_user2 = input(
+            '[C]adastrar [A]lterar [R]emover [V]oltar: '
+        ).lower()
         mostrar = EstoqueDao.ler_produto()
         for i in mostrar:
             print(i, end='')  # Print da lista de produtos(estoque) pro usuário
@@ -81,24 +100,40 @@ while True:
             preco = input('Valor do produto: R$ ')
             categoria = input('Categoria do produto: ').upper()
             quantidade = input('Quantidade do produto para estoque: ')
-            
-            EstoqueController.cadastrar_produto(nome=nome, preco=preco, categoria=categoria, quantidade=quantidade)
+
+            EstoqueController.cadastrar_produto(
+                nome=nome,
+                preco=preco,
+                categoria=categoria,
+                quantidade=quantidade,
+            )
 
         elif decisao_user2 == 'a':
 
-            nome_alterar = input('Nome do produto que deseja alterar: ').upper()
+            nome_alterar = input(
+                'Nome do produto que deseja alterar: '
+            ).upper()
             print('Dados para alteração')
             nome_alterado = input('Nome do produto: ').upper()
             valor_alterado = input('Valor do produto: R$').upper()
             categoria_alterada = input('Categoria do produto: ').upper()
-            quantidade_alterada = input('Digite a quantidade do produto: ').upper()
+            quantidade_alterada = input(
+                'Digite a quantidade do produto: '
+            ).upper()
 
-            EstoqueController.alterar_produto(alterar_produto=nome_alterar, nome=nome_alterado,
-                            preco=valor_alterado, categoria=categoria_alterada, quantidade=quantidade_alterada)
+            EstoqueController.alterar_produto(
+                alterar_produto=nome_alterar,
+                nome=nome_alterado,
+                preco=valor_alterado,
+                categoria=categoria_alterada,
+                quantidade=quantidade_alterada,
+            )
 
         elif decisao_user2 == 'r':
 
-            produtoRemovido = input('Digite nome do produto que deseja remover: ').upper()
+            produtoRemovido = input(
+                'Digite nome do produto que deseja remover: '
+            ).upper()
             EstoqueController.remover_produto(nome_produto=produtoRemovido)
 
         elif decisao_user2 == 'v':
@@ -114,7 +149,9 @@ while True:
     # ÁREA DE FORNECEDOR
 
     elif decisao == 3:
-        decisao_user3 = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
+        decisao_user3 = input(
+            '[C]adastrar [A]lterar [R]emover [V]oltar: '
+        ).lower()
         mostrar = FornecedorDao.ler_fornecedores()
         for i in mostrar:
             print(i, end='')  # mostrar lista de fornecedor pro usuário
@@ -126,12 +163,19 @@ while True:
             cnpj = input('Digite CNPJ da empresa: ')
             categoria = input('DIgite a categoria: ').upper()
 
-            FornecedorController.cadastrar(nome=nomeForne, telefone=telefone, cnpj=cnpj, categoria=categoria)
+            FornecedorController.cadastrar(
+                nome=nomeForne,
+                telefone=telefone,
+                cnpj=cnpj,
+                categoria=categoria,
+            )
 
         elif decisao_user3 == 'r':
 
             removerFornecedor = input('Nome do fornecedor: ').upper()
-            FornecedorController.remover_fornecedor(nome_fornecedor=removerFornecedor)
+            FornecedorController.remover_fornecedor(
+                nome_fornecedor=removerFornecedor
+            )
 
         elif decisao_user3 == 'a':
 
@@ -142,8 +186,13 @@ while True:
             cnpjAlt = input('Digite o cnpj: ')
             catAlt = input('Digite a categoria: ').upper()
 
-            FornecedorController.alterarFornecedor(alterarForne=alterar, nome=nomeAlt,
-                                                telefone=telAlt, cnpj=cnpjAlt, categoria=catAlt)
+            FornecedorController.alterarFornecedor(
+                alterarForne=alterar,
+                nome=nomeAlt,
+                telefone=telAlt,
+                cnpj=cnpjAlt,
+                categoria=catAlt,
+            )
 
         elif decisao_user3 == 'v':
             continue
@@ -158,7 +207,9 @@ while True:
     # ÁREA DE CLIENTES
 
     elif decisao == 4:
-        decisao_user4 = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
+        decisao_user4 = input(
+            '[C]adastrar [A]lterar [R]emover [V]oltar: '
+        ).lower()
         mostrar = ClienteDao.ler_clientes()
         for i in mostrar:
             print(i, end='')
@@ -170,12 +221,19 @@ while True:
             telefoneClt = input('Telefone de contato: ')
             enderecoclt = input('Digite seu endereço: ').upper()
 
-            ClienteController.cadastrarCliente(nome=nomeClt, cpf=cpfClt, email=emailClt, telefone=telefoneClt,
-                                            endereco=enderecoclt)
+            ClienteController.cadastrarCliente(
+                nome=nomeClt,
+                cpf=cpfClt,
+                email=emailClt,
+                telefone=telefoneClt,
+                endereco=enderecoclt,
+            )
 
         elif decisao_user4 == 'r':
 
-            remo_client = input('Digite o nome do cliente que deseja remover: ').upper()
+            remo_client = input(
+                'Digite o nome do cliente que deseja remover: '
+            ).upper()
             ClienteController.removerCliente(nome_cliente=remo_client)
 
         elif decisao_user4 == 'a':
@@ -190,8 +248,14 @@ while True:
             tel_cl = input('Número de telefone: ')
             end_cl = input('Endereço do cliente: ').upper()
 
-            ClienteController.alterarCliente(nomeCliente=alterarCLient, nome=nome_cl,
-                                            cpf=cpf_cl, email=email_cl, telefone=tel_cl, endereco=end_cl)
+            ClienteController.alterarCliente(
+                nomeCliente=alterarCLient,
+                nome=nome_cl,
+                cpf=cpf_cl,
+                email=email_cl,
+                telefone=tel_cl,
+                endereco=end_cl,
+            )
 
         elif decisao_user4 == 'v':
             continue
@@ -202,7 +266,9 @@ while True:
     # ÁREA DE FUNCIONÁRIO
 
     elif decisao == 5:
-        decisao_user5 = input('[C]adastrar [A]lterar [R]emover [V]oltar: ').lower()
+        decisao_user5 = input(
+            '[C]adastrar [A]lterar [R]emover [V]oltar: '
+        ).lower()
 
         mostrar = FuncionarioDao.lista_funcionario()
         for i in mostrar:
@@ -217,16 +283,26 @@ while True:
             end_func = input('Digite o endereço com Nº: ').upper()
             clt_func = input('Empregado com carteira asssinada: ').upper()
 
-            FuncionarioController.cadastrar_funcionario(nome=nome_func, cpf=cpf_func, email=email_func,
-                                                        telefone=tel_func, endereco=end_func, clt=clt_func)
+            FuncionarioController.cadastrar_funcionario(
+                nome=nome_func,
+                cpf=cpf_func,
+                email=email_func,
+                telefone=tel_func,
+                endereco=end_func,
+                clt=clt_func,
+            )
 
         elif decisao_user5 == 'r':
 
             nome_funcionario = input('Nome do funcionário: ').upper()
-            FuncionarioController.remover_funcionario(remover_func=nome_funcionario)
+            FuncionarioController.remover_funcionario(
+                remover_func=nome_funcionario
+            )
 
         elif decisao_user5 == 'a':
-            nome_alterar = input('Digite o nome do funcionário que deseja alterar: ').upper()
+            nome_alterar = input(
+                'Digite o nome do funcionário que deseja alterar: '
+            ).upper()
             print('')
             print('Dados para alteração')
             print('')
@@ -234,28 +310,31 @@ while True:
             cpf_f = input('Digite o CPF: ')
             email_f = input('Digite Email: ').lower()
             telefone_f = input('Número de telefone: ')
-            endereco_f = input('Digite o nome do endereço com número: ').upper()
+            endereco_f = input(
+                'Digite o nome do endereço com número: '
+            ).upper()
             clt_f = input('Carteira assinada: [S]im [N]ão: ').upper()
-            
 
-            FuncionarioController.alterar_funcionario(nome_funcionario=nome_alterar, nome=nome_f, cpf=cpf_f,
-                                                    email=email_f, telefone=telefone_f, endereco=endereco_f,
-                                                    clt=clt_f)
-        
+            FuncionarioController.alterar_funcionario(
+                nome_funcionario=nome_alterar,
+                nome=nome_f,
+                cpf=cpf_f,
+                email=email_f,
+                telefone=telefone_f,
+                endereco=endereco_f,
+                clt=clt_f,
+            )
+
         elif decisao_user5 == 'v':
             continue
-        
-    #ÁREA DE CAIXA 
+
+    # ÁREA DE CAIXA
 
     elif decisao == 6:
         decisao_user6 = input('[1]Venda [2]Sair: ')
         decisao_user6 = int(decisao_user6)
 
-
         if decisao_user6 == 1:
-            # mostrar = EstoqueDao.ler_produto()
-            # for i in mostrar:
-            #    print(i, end='')
 
             cpf_usr = input('CPF do usuário: ')
             vendedor_caixa = input('Nome do funcionário: ').upper()
@@ -264,16 +343,15 @@ while True:
             quant = input('Quantidade vendida: ')
             quant = int(quant)
             valor_passado = input('Valor total do comprador: ')
-            valor_passado = int(valor_passado) 
+            valor_passado = int(valor_passado)
 
             VendasController.caixa_controller(
-                            comprador=cpf_usr,
-                            itens_vendidos=itens_vendidos,
-                            vendedor=vendedor_caixa,
-                            quantidade_vendida=quant, 
-                            valor_total=valor_passado
+                comprador=cpf_usr,
+                itens_vendidos=itens_vendidos,
+                vendedor=vendedor_caixa,
+                quantidade_vendida=quant,
+                valor_total=valor_passado,
             )
-
 
         elif decisao_user6 == 2:
             continue
@@ -283,13 +361,11 @@ while True:
             continue
 
     elif decisao == 7:
-        
+
         decisoes = input('[R]elatório total de vendas []').upper()
 
         if decisoes == 'R':
             pass
-
-
 
     else:
         pass
