@@ -249,12 +249,8 @@ class VendasDao:
 
         return lista_venda
 
-
-# Classe de tratamentos
-
-
-class TratamentosDao:
     @classmethod
-    def salvar(cls):
-        with open('tratamentos.txt', 'a') as arq:
-            pass
+    def ler_vendas(cls):
+        mostrar_vendas = open(DATA_BASE + 'vendas.txt', 'r')
+        lista_vendas = mostrar_vendas.readlines()
+        return lista_vendas
