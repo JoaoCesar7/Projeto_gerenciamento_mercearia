@@ -8,7 +8,6 @@ from dao import (
     ClienteDao,
     FuncionarioDao,
     VendasDao,
-    TratamentosDao,
 )
 from datetime import datetime
 
@@ -460,7 +459,6 @@ class VendasController:
     ):
         list_estoque = EstoqueDao.ler()
         list_funcionario = FuncionarioDao.ler()
-        list_categoria = CategoriaDao.ler_categoria()
 
         estoque = list(
             filter(
