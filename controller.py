@@ -561,3 +561,17 @@ class VendasController:
 
         else:
             print('Funcionário NÃO existe em nossa base de dados')
+
+
+# RELATÓRIOS
+class RelatoriosProdController:
+    @classmethod
+    def mostrar_relat_geral(cls, Solicitar_relatorio):
+        # TODO: filtrar relatório de vendas, nome, produto, categoria, quantidade de venda
+        x = VendasDao.ler_relatorio_geral()
+
+        lista_tmp = []
+
+        for i in range(len(x)):
+            if not x[i].nome == Solicitar_relatorio:
+                pass
