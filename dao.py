@@ -236,21 +236,31 @@ class VendasDao:
         with open(DATA_BASE + 'vendas.txt', 'r') as arq:
             cls.venda = arq.readlines()
 
-            cls.venda = list(map(lambda x: x.replace('\n'), cls.venda))
-            cls.venda = list(map(lambda x: x.split('|'), cls.venda))
-
         lista_venda = []
 
         if len(cls.venda) > 0:
             for i in cls.venda:
+                i = i.split('|')
                 lista_venda.append(
-                    Vendas(Produtos(i[0], i[1], i[2], i[3]), i[4], i[5])
+                    Vendas(Produtos(i[0], i[1], i[2]), i[3], i[4], i[5])
                 )
 
         return lista_venda
 
+# Ordenar Relatório geral de produtos 
     @classmethod
-    def ler_vendas(cls):
-        mostrar_vendas = open(DATA_BASE + 'vendas.txt', 'r')
-        lista_vendas = mostrar_vendas.readlines()
-        return lista_vendas
+    def ler_relatorio_geral(cls):
+        with open(DATA_BASE + 'vendas.txt', 'r') as arq:
+            cls.rel = arq.readlines()
+
+        lista_rel = []
+
+        if len(cls.rel) > 0:
+            for i in cls.rel:
+                i = i.split('|')
+                lista_rel.append(
+                    Produtos(i[2], i[4], i[5])
+                )
+
+        return lista_rel
+
