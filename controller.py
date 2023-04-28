@@ -532,6 +532,11 @@ class VendasController:
                                     + '\n'
                                 )
 
+                                with open(
+                                    DATA_BASE + 'estoque.txt', 'w'
+                                ) as arq:
+                                    arq.writelines(estoque_temp)
+
                                 print(f'Transação efetuada com sucesso')
 
                             else:
@@ -573,5 +578,8 @@ class RelatoriosProdController:
         lista_tmp = []
 
         for i in range(len(x)):
-            if not x[i].nome == Solicitar_relatorio:
-                pass
+            pass
+            #DESENVOLVIMENTO
+
+
+        
