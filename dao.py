@@ -247,7 +247,7 @@ class VendasDao:
 
         return lista_venda
 
-# Ordenar Relatório geral de produtos 
+    # Ordenar Relatório geral de produtos
     @classmethod
     def ler_relatorio_geral(cls):
         with open(DATA_BASE + 'vendas.txt', 'r') as arq:
@@ -258,9 +258,6 @@ class VendasDao:
         if len(cls.rel) > 0:
             for i in cls.rel:
                 i = i.split('|')
-                lista_rel.append(
-                    Produtos(i[2], i[4], i[5])
-                )
+                lista_rel.append(Produtos(i[2], i[4], i[5]))
 
         return lista_rel
-
