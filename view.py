@@ -113,9 +113,7 @@ while True:
 
         mostrar = EstoqueDao.ler_produto()
         for i in mostrar:
-            print(
-                i, end=''
-            )  # Print da lista de produtos(estoque) pro usuário
+            print(i, end='')  # Print da lista de produtos(estoque) pro usuário
 
         if decisao_user2 == 'c':
 
@@ -231,9 +229,7 @@ while True:
 
         else:
             print('')
-            print(
-                'Desculpe... Opção inválida, tente novamente as opções...'
-            )
+            print('Desculpe... Opção inválida, tente novamente as opções...')
             print('Digite [C] [R] [A] [V]')
             print('')
             continue
@@ -435,12 +431,10 @@ while True:
         # DESENVOLVIMENTO
         if decisao_user7 == 'v':
             solicitar = 'v'
-            RelatoriosProdController.mostrar_relat_geral(Solicitar_relatorio=solicitar)
-
-            
+            RelatoriosProdController.mostrar_relat_geral(
+                Solicitar_relatorio=solicitar
+            )
 
     else:
         print('Opção inválida...')
         continue
-
-
