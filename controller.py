@@ -569,6 +569,8 @@ class VendasController:
 
 
 # RELATÓRIOS
+
+
 class RelatoriosProdController:
     @classmethod
     def mostrar_relat_geral(cls, Solicitar_relatorio):
@@ -579,5 +581,7 @@ class RelatoriosProdController:
 
         for i in range(len(x)):
             lista_tmp.append(x[i].categoria)
+            #DESENVOLVIMENTO
 
-            # DESENVOLVIMENTO
+
+        
