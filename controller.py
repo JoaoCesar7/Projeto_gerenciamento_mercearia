@@ -578,8 +578,6 @@ class RelatoriosProdController:
         lista_tmp = []
 
         for i in range(len(x)):
-            pass
-            #DESENVOLVIMENTO
+            lista_tmp.append(x[i].categoria)
 
-
-        
+            # DESENVOLVIMENTO
