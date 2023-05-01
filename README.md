@@ -18,4 +18,9 @@ armazenamento e estrutura dos dados, modelagem dos dados
 
 # Proposta
 
-Desenvlver gerenciamento mercearia. O projeto tem que Cadastrar, Alterar, Remover; Categoria, Produtos, Fornecedor, Funcionário entre outros.
+Desenvlver gerenciamento mercearia. O projeto tem que Cadastrar, Alterar, Remover; Categoria, Produtos, Fornecedor, Funcionário, Relatorios entre outros
+
+<h3>Ajustes e melhorias</h3>
+
+- [x] verificações de funcionários existentes
+- ...
