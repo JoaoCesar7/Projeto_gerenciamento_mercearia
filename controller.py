@@ -59,7 +59,7 @@ class CategoriaController:
     @classmethod
     def alterarCategoria(
         cls, alterarCategoria, alteradaCategoria
-    ):  # Alterar Categoria
+    ):  
         y = CategoriaDao.ler_categoria()
         print('')
         alt = list(
@@ -90,7 +90,7 @@ class CategoriaController:
             if not existe:
                 CategoriaDao.salvarCategoria(alteradaCategoria)
                 print('Categoria alterada com sucesso!')
-
+    
 
 # CLASSES DA ÁREA DE PRODUTOS(ESTOQUE)
 
@@ -580,8 +580,13 @@ class RelatoriosProdController:
         lista_tmp = []
 
         for i in range(len(x)):
-            lista_tmp.append(x[i].categoria)
-            #DESENVOLVIMENTO
+            if x[i].nome:
+                quant = int(x[i].categoria)
+
+                lista_tmp.append(quant)
+
+  
+
 
 
         
