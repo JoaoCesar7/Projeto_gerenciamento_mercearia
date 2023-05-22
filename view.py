@@ -33,7 +33,7 @@ while True:
     # caso digite algo que não seja nenhuma opção acima
     try:
         decisao = int(decisao)
-    
+
         print('')
         match decisao:
 
@@ -123,10 +123,10 @@ while True:
 
                 print('')
 
-  
-
                 if decisao_user2 == 'c':
-                    mostrar = EstoqueDao.ler_produto() # Print da lista de produtos(estoque) pro usuário
+                    mostrar = (
+                        EstoqueDao.ler_produto()
+                    )   # Print da lista de produtos(estoque) pro usuário
                     print('---------------')
                     for i in mostrar:
                         print(i, end='')
@@ -156,7 +156,9 @@ while True:
                     print('Dados para alteração')
                     nome_alterado = input('Nome do produto: ').upper()
                     valor_alterado = input('Valor do produto: R$').upper()
-                    categoria_alterada = input('Categoria do produto: ').upper()
+                    categoria_alterada = input(
+                        'Categoria do produto: '
+                    ).upper()
                     quantidade_alterada = input(
                         'Digite a quantidade do produto: '
                     ).upper()
@@ -179,7 +181,9 @@ while True:
                     produtoRemovido = input(
                         'Digite nome do produto que deseja remover: '
                     ).upper()
-                    EstoqueController.remover_produto(nome_produto=produtoRemovido)
+                    EstoqueController.remover_produto(
+                        nome_produto=produtoRemovido
+                    )
 
                 elif decisao_user2 == 'v':
                     continue
@@ -206,14 +210,13 @@ while True:
                 ).lower()
 
                 print('')
-                
 
                 if decisao_user3 == 'c':
 
                     mostrar = FornecedorDao.ler_fornecedores()
                     print('--------------')
                     for i in mostrar:
-                        print(i, end='')  
+                        print(i, end='')
 
                     nomeForne = input('Nome do fornecedor: ').upper()
                     telefone = input('Número de telefone: ')
@@ -232,7 +235,7 @@ while True:
                     mostrar = FornecedorDao.ler_fornecedores()
                     print('--------------')
                     for i in mostrar:
-                        print(i, end='')  
+                        print(i, end='')
 
                     removerFornecedor = input('Nome do fornecedor: ').upper()
                     FornecedorController.remover_fornecedor(
@@ -244,7 +247,7 @@ while True:
                     mostrar = FornecedorDao.ler_fornecedores()
                     print('--------------')
                     for i in mostrar:
-                        print(i, end='')  
+                        print(i, end='')
 
                     alterar = input('Nome do fornecedor: ').upper()
                     print('Informações da alteração do fornecedor')
@@ -266,7 +269,9 @@ while True:
 
                 else:
                     print('')
-                    print('Desculpe... Opção inválida, tente novamente as opções...')
+                    print(
+                        'Desculpe... Opção inválida, tente novamente as opções...'
+                    )
                     print('Digite [C] [R] [A] [V]')
                     print('')
                     continue
@@ -286,7 +291,6 @@ while True:
                 ).lower()
 
                 print('')
-
 
                 if decisao_user4 == 'c':
 
@@ -315,7 +319,6 @@ while True:
                     print('-------------')
                     for i in mostrar:
                         print(i, end='')
-
 
                     remo_client = input(
                         'Digite o nome do cliente que deseja remover: '
@@ -370,7 +373,6 @@ while True:
 
                 print('')
 
-
                 if decisao_user5 == 'c':
 
                     mostrar = FuncionarioDao.lista_funcionario()
@@ -383,7 +385,9 @@ while True:
                     email_func = input('Digite o email: ').lower()
                     tel_func = input('Telefone de contato: ')
                     end_func = input('Digite o endereço com Nº: ').upper()
-                    clt_func = input('Empregado com carteira asssinada: ').upper()
+                    clt_func = input(
+                        'Empregado com carteira asssinada: '
+                    ).upper()
 
                     FuncionarioController.cadastrar_funcionario(
                         nome=nome_func,
@@ -395,7 +399,6 @@ while True:
                     )
 
                 elif decisao_user5 == 'r':
-
 
                     mostrar = FuncionarioDao.lista_funcionario()
                     print('--------------')
@@ -497,11 +500,7 @@ while True:
 
                 # DESENVOLVIMENTO
                 if decisao_user7 == 'v':
-                    solicitar = 'v'
-                    RelatoriosProdController.mostrar_relat_geral(
-                        Solicitar_relatorio=solicitar
-                    )
-
+                    RelatoriosProdController.relatoria_produtos()
     except:
         print('Caractere inválido..')
         continue
