@@ -215,15 +215,15 @@ class VendasDao:
     def salvar(cls, venda: Vendas):
         with open(DATA_BASE + 'vendas.txt', 'a') as arq:
             arq.writelines(
-                venda.vendedor
-                + '|'
-                + venda.comprador
-                + '|'
-                + venda.itens_vendidos.nome
+                venda.itens_vendidos.nome
                 + '|'
                 + venda.itens_vendidos.preco
                 + '|'
                 + venda.itens_vendidos.categoria
+                + '|'
+                + venda.vendedor
+                + '|'
+                + venda.comprador
                 + '|'
                 + str(venda.quantidade_vendida)
                 + '|'
