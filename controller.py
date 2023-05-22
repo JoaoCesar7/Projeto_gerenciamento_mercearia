@@ -57,9 +57,7 @@ class CategoriaController:
                     arq.writelines(i.categoria)
 
     @classmethod
-    def alterarCategoria(
-        cls, alterarCategoria, alteradaCategoria
-    ):  
+    def alterarCategoria(cls, alterarCategoria, alteradaCategoria):
         y = CategoriaDao.ler_categoria()
         print('')
         alt = list(
@@ -90,7 +88,7 @@ class CategoriaController:
             if not existe:
                 CategoriaDao.salvarCategoria(alteradaCategoria)
                 print('Categoria alterada com sucesso!')
-    
+
 
 # CLASSES DA ÁREA DE PRODUTOS(ESTOQUE)
 
@@ -573,20 +571,44 @@ class VendasController:
 
 class RelatoriosProdController:
     @classmethod
-    def mostrar_relat_geral(cls, Solicitar_relatorio):
-        # TODO: filtrar relatório de vendas, nome, produto, categoria, quantidade de venda
-        x = VendasDao.ler_relatorio_geral()
+    def relatoria_produtos(cls):
+        vendas = VendasDao.ler()
+        produtos = []
 
-        lista_tmp = []
+        for i in vendas:
+            nome = i.itens_vendidos.nome
+            quantidade = i.quantidade_vendida
 
-        for i in range(len(x)):
-            if x[i].nome:
-                quant = int(x[i].categoria)
+            tamanho = list(filter(lambda x: x['produto'] == nome, produtos))
 
-                lista_tmp.append(quant)
-
-  
-
-
-
+            if len(tamanho) > 0:
+                produtos = list(
+                    map(
+                        lambda x: {
+                            'produto': nome,
+                            'quantidade': int(x['quantidade'])
+                            + int(quantidade),
+                        }
+                        if(x['produto'] == nome)
+                        else(x), produtos,
+                    )
+                )
+            else:
+                produtos.append(
+                    {'produto': nome, 'quantidade': int(quantidade)}
+                )
         
+        ordenado = sorted(produtos, key=lambda k: k['quantidade'], reverse=True)
+
+        cont = 1
+
+        for i in ordenado:
+            print(f"========== Produto [{cont}] ==========")
+            print(
+                f"Nome: {i['produto']}\n"
+                f"Quantidade: {i['quantidade']}\n"
+            )
+            cont += 1
+
+
+            
