@@ -500,18 +500,16 @@ while True:
                     RelatoriosProdController.relatoria_produtos()
 
                 elif decisao_user7 == 'd':
-                    
+
                     data_inicial = input('Digite a data de inicio: ')
                     data_final = input('Digite a data final: ')
 
                     try:
                         RelatorioData.relatorio_data(
-                                data_inicio=data_inicial,
-                                data_termino=data_final
+                            data_inicio=data_inicial, data_termino=data_final
                         )
                     except:
                         print('Obrigatório o uso de /')
-
 
     except:
         print('Caractere inválido..')
