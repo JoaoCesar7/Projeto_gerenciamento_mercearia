@@ -8,6 +8,7 @@ from controller import (
     FuncionarioController,
     VendasController,
     RelatoriosProdController,
+    RelatorioData,
 )
 from dao import (
     CategoriaDao,
@@ -492,15 +493,26 @@ while True:
                     + '\n'
                     + '[D]Relatório  de vendas por data'
                     + '\n'
-                    + '[P]Relatório de produtos mais vendidos'
-                    + '\n'
-                    + '[C]Relatório de clientes que mais compraram:'
-                    + '\n'
                 ).lower()
 
                 # DESENVOLVIMENTO
                 if decisao_user7 == 'v':
                     RelatoriosProdController.relatoria_produtos()
+
+                elif decisao_user7 == 'd':
+                    
+                    data_inicial = input('Digite a data de inicio: ')
+                    data_final = input('Digite a data final: ')
+
+                    try:
+                        RelatorioData.relatorio_data(
+                                data_inicio=data_inicial,
+                                data_termino=data_final
+                        )
+                    except:
+                        print('Obrigatório o uso de /')
+
+
     except:
         print('Caractere inválido..')
         continue
