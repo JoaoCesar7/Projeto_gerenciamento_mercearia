@@ -589,30 +589,29 @@ class RelatoriosProdController:
                             'quantidade': int(x['quantidade'])
                             + int(quantidade),
                         }
-                        if(x['produto'] == nome)
-                        else(x), produtos,
+                        if (x['produto'] == nome)
+                        else (x),
+                        produtos,
                     )
                 )
             else:
                 produtos.append(
                     {'produto': nome, 'quantidade': int(quantidade)}
                 )
-        
-        ordenado = sorted(produtos, key=lambda k: k['quantidade'], reverse=True)
+
+        ordenado = sorted(
+            produtos, key=lambda k: k['quantidade'], reverse=True
+        )
 
         cont = 1
 
         for i in ordenado:
-            print(f"========== Produto [{cont}] ==========")
-            print(
-                f"Nome: {i['produto']}\n"
-                f"Quantidade: {i['quantidade']}\n"
-            )
+            print(f'========== Produto [{cont}] ==========')
+            print(f"Nome: {i['produto']}\n" f"Quantidade: {i['quantidade']}\n")
             cont += 1
 
 
 class RelatorioData:
-
     @classmethod
     def relatorio_data(cls, data_inicio, data_termino):
         vendas = VendasDao.ler()
@@ -622,7 +621,7 @@ class RelatorioData:
 
         vendas_selecionadas = list(
             filter(
-                lambda x: datetime.strptime(x.data, '%d/%m/%Y') >= data_inicio1 
+                lambda x: datetime.strptime(x.data, '%d/%m/%Y') >= data_inicio1
                 and datetime.strptime(x.data, '%d/%m/%Y') <= data_termino1,
                 vendas,
             )
@@ -630,18 +629,16 @@ class RelatorioData:
         cont = 1
         total = 0
         for i in vendas_selecionadas:
-            print(f"========== Venda [{cont}] ==========")
+            print(f'========== Venda [{cont}] ==========')
             print(
-                f"Nome: {i.itens_vendidos.nome}\n"
-                f"Categoria: {i.itens_vendidos.categoria}\n"
-                f"Data: {i.data}\n"
-                f"Quantidade: {i.quantidade_vendida}\n"
-                f"Cliente: {i.comprador}\n"
-                f"Vendedor: {i.vendedor}"
+                f'Nome: {i.itens_vendidos.nome}\n'
+                f'Categoria: {i.itens_vendidos.categoria}\n'
+                f'Data: {i.data}\n'
+                f'Quantidade: {i.quantidade_vendida}\n'
+                f'Cliente: {i.comprador}\n'
+                f'Vendedor: {i.vendedor}'
             )
             total += int(i.itens_vendidos.preco) * int(i.quantidade_vendida)
             cont += 1
-        
-        print(f"Total vendido: {total}")
 
-            
+        print(f'Total vendido: {total}')
