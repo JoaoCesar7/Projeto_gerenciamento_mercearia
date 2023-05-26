@@ -611,4 +611,37 @@ class RelatoriosProdController:
             cont += 1
 
 
+class RelatorioData:
+
+    @classmethod
+    def relatorio_data(cls, data_inicio, data_termino):
+        vendas = VendasDao.ler()
+
+        data_inicio1 = datetime.strptime(data_inicio, '%d/%m/%Y')
+        data_termino1 = datetime.strptime(data_termino, '%d/%m/%Y')
+
+        vendas_selecionadas = list(
+            filter(
+                lambda x: datetime.strptime(x.data, '%d/%m/%Y') >= data_inicio1 
+                and datetime.strptime(x.data, '%d/%m/%Y') <= data_termino1,
+                vendas,
+            )
+        )
+        cont = 1
+        total = 0
+        for i in vendas_selecionadas:
+            print(f"========== Venda [{cont}] ==========")
+            print(
+                f"Nome: {i.itens_vendidos.nome}\n"
+                f"Categoria: {i.itens_vendidos.categoria}\n"
+                f"Data: {i.data}\n"
+                f"Quantidade: {i.quantidade_vendida}\n"
+                f"Cliente: {i.comprador}\n"
+                f"Vendedor: {i.vendedor}"
+            )
+            total += int(i.itens_vendidos.preco) * int(i.quantidade_vendida)
+            cont += 1
+        
+        print(f"Total vendido: {total}")
+
             
